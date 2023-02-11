@@ -1,6 +1,7 @@
 import { useMemo } from "react";
 
-const useFilterIngredient = (ingredients, targetType) => useMemo(
+const useFilterIngredient = (ingredients, targetType) =>
+  useMemo(
     () =>
       ingredients ? ingredients.filter(({ type }) => type === targetType) : [],
     [ingredients, targetType]

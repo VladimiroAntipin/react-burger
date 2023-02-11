@@ -1,30 +1,34 @@
-import "./App.module.css";
+import { element, string } from "prop-types";
+import { useEffect } from "react";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { getIngredients } from "../../services/reducers/ingredients";
 import AppHeader from "../AppHeader/AppHeader";
 import { BurgerConstructor } from "../BurgerConstructor/BurgerConstructor";
-import BurgerIngredients from "../BurgerIngredients/BurgerIngredients";
-import { useFetch } from "../../hooks/useFetch";
-
-const ingredientsUrl = "https://norma.nomoreparties.space/api/ingredients";
+import { BurgerIngredients } from "../BurgerIngredients/BurgerIngredients";
+import appStyle from "./App.module.css";
 
 function App() {
-  const { data } = useFetch(ingredientsUrl);
-  const ingredients = data?.data;
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(getIngredients());
+  }, [dispatch]);
+
   return (
-    <div className="App">
+    <div className={appStyle.App}>
       <AppHeader />
-      <main
-        style={{
-          display: "flex",
-          margin: "0 auto",
-          maxWidth: "1280px",
-          justifyContent: "center",
-        }}
-      >
-        <BurgerIngredients ingredients={ingredients} />
-        <BurgerConstructor selectedIngredients={ingredients ?? []} />
+      <main className={appStyle.Main}>
+        <BurgerIngredients />
+        <BurgerConstructor />
       </main>
     </div>
   );
+}
+
+App.propTypes = {
+  className: string,
+  AppHeader: element,
+  BurgerIngredients: element,
+  BurgerConstructor: element,
 }
 
 export default App;

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { jsonFetch } from "../utils/fetch";
 
 export const useFetch = (url) => {
-  const [status, setStatus] = useState("loading");
+  const [status, setStatus] = useState("LOADING");
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -10,11 +10,11 @@ export const useFetch = (url) => {
     jsonFetch(url)
       .then((result) => {
         setData(result);
-        setStatus("success");
+        setStatus("SUCCESS");
       })
       .catch((error) => {
         setError(error);
-        setStatus("error");
+        setStatus("ERROR");
       });
   }, [url]);
 
@@ -22,7 +22,7 @@ export const useFetch = (url) => {
     status,
     data,
     error,
-    isLoading: status === "loading",
-    isError: status === "error",
+    isLoading: status === "LOADING",
+    isError: status === "ERROR",
   };
 };
