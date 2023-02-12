@@ -1,5 +1,4 @@
 import { BurgerIcon, ListIcon, Logo, ProfileIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { element, string } from "prop-types";
 import headerStyle from "./AppHeader.module.css";
 
 function AppHeader() {
@@ -38,15 +37,6 @@ function AppHeader() {
       </nav>
     </header>
   );
-}
-
-AppHeader.propTypes = {
-  className: string,
-  BurgerIcon: element,
-  ListIcon: element,
-  type: string,
-  Logo: element,
-  ProfileIcon: element,
 }
 
 export default AppHeader;

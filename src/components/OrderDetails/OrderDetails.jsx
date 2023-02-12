@@ -4,6 +4,8 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import done from "../../images/done.svg";
 import { Modal } from "../Modal/Modal";
 import orderDetailsStyle from "./OrderDetails.module.css";
+import { SEND_ORDER_STALE } from "../../services/actions/orderObject";
+import { CONSTRUCTOR_RESET_INGREDIENT } from "../../services/actions/burgerConstructor";
 
 export const OrderDetails = () => {
   const { status, data } = useAppSelector((store) => store.orderObject);
@@ -16,8 +18,8 @@ export const OrderDetails = () => {
   return (
     <Modal
       onClose={() => {
-        dispatch({ type: "SEND_ORDER_STALE" });
-        dispatch({ type: "CONSTRUCTOR_RESET_INGREDIENT" });
+        dispatch({ type: SEND_ORDER_STALE });
+        dispatch({ type: CONSTRUCTOR_RESET_INGREDIENT });
       }}
     >
       {status === "FAILED" ? (

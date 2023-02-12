@@ -1,8 +1,6 @@
-import { createFetchReducer } from "./fetchReducer";
-
-const ingredientsUrl = "https://norma.nomoreparties.space/api/ingredients";
+import { BASE_URL, createFetchReducer } from "./fetchReducer";
 
 export const {
   fetchReducer: ingredientsReducer,
   getAction: getIngredients }
-  = createFetchReducer(ingredientsUrl);
+  = createFetchReducer(`${BASE_URL}ingredients`);

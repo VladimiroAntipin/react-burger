@@ -1,7 +1,4 @@
-import {
-  ConstructorElement,
-  DragIcon
-} from "@ya.praktikum/react-developer-burger-ui-components";
+import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { atom } from "jotai";
 import { useAtom } from "jotai/react";
 import { bool, element, string } from "prop-types";
@@ -13,6 +10,9 @@ import { useSelectedMidIngredientByIndex } from "../../hooks/useSelectedIngredie
 import { mergeRefs } from "../../utils/mergeRefs";
 import { ingredientToConstructorElementProps } from "../BurgerConstructor/BurgerConstructor";
 import burgerConstructorStyle from "../BurgerConstructor/BurgerConstructor.module.css";
+import { CONSTRUCTOR_MOVE_INGREDIENT, CONSTRUCTOR_DELETE_INGREDIENT } from "../../services/actions/burgerConstructor";
+
+
 
 const overIndexAtom = atom(null);
 const countOfOverItems = atom(0);
@@ -38,7 +38,7 @@ export function BurgerConstructorIngredient({ index, ingredient }) {
     collect: (monitor) => ({ isOver: monitor.isOver() }),
     drop: (item) => {
       dispatch({
-        type: "CONSTRUCTOR_MOVE_INGREDIENT",
+        type: CONSTRUCTOR_MOVE_INGREDIENT,
         payload: [index, item.index],
       });
     },
@@ -72,7 +72,7 @@ export function BurgerConstructorIngredient({ index, ingredient }) {
       <ConstructorElement
         handleClose={() =>
           dispatch({
-            type: "CONSTRUCTOR_DELETE_INGREDIENT",
+            type: CONSTRUCTOR_DELETE_INGREDIENT,
             payload: { index },
           })
         }

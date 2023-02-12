@@ -4,9 +4,10 @@ import { useMemo } from "react";
 import { useDrop } from "react-dnd";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useSelectedIngredients, useSelectedIngredientsIds, useSelectedIngredientsPrice } from "../../hooks/useSelectedIngredients";
-import { makeOrder } from "../../services/reducers/orderObject";
+import { makeOrder } from "../../services/actions/orderObject";
 import { BurgerConstructorIngredient } from "../BurgerConstructorIngredient/BurgerConstructorIngredient";
 import burgerConstructorStyle from "./BurgerConstructor.module.css";
+import { CONSTRUCTOR_ADD_INGREDIENT } from "../../services/actions/burgerConstructor";
 
 export const ingredientToConstructorElementProps = (ingredient) => ({
   price: ingredient?.price ?? 0,
@@ -56,7 +57,7 @@ export function BurgerConstructor() {
     accept: "ingredient",
     drop: (data) =>
       dispatch({
-        type: "CONSTRUCTOR_ADD_INGREDIENT",
+        type: CONSTRUCTOR_ADD_INGREDIENT,
         payload: data,
       }),
   });

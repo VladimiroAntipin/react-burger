@@ -1,4 +1,3 @@
-import { element, string } from "prop-types";
 import { useEffect } from "react";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { getIngredients } from "../../services/reducers/ingredients";
@@ -22,13 +21,6 @@ function App() {
       </main>
     </div>
   );
-}
-
-App.propTypes = {
-  className: string,
-  AppHeader: element,
-  BurgerIngredients: element,
-  BurgerConstructor: element,
 }
 
 export default App;

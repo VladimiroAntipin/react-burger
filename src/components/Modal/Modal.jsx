@@ -7,13 +7,17 @@ import modalStyles from "./Modal.module.css";
 
 export const Modal = ({ onClose, children }) => {
   useEffect(() => {
-    document.addEventListener("keydown",(event) => {
-        if (event.key !== "Escape") return;
+    function closeByEscape(evt) {
+      if(evt.key === 'Escape') {
         onClose();
-      },
-    );
-    return;
-  }, [onClose]);
+      }
+    }
+      document.addEventListener('keydown', closeByEscape);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+      }
+
+  }, [onClose]) 
 
   return (
     <Portal>

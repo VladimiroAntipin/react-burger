@@ -1,9 +1,10 @@
 import { Counter, CurrencyIcon, } from "@ya.praktikum/react-developer-burger-ui-components";
-import { bool, element, func, number, string } from "prop-types";
+import { bool, element, func, number, object, string } from "prop-types";
 import { useDrag } from "react-dnd";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useBasketCountOf } from "../../hooks/useBasketCountOf";
 import ingredientCardStyle from "./BurgerIngredient.module.css";
+import { INGREDIENT_DETAILS_MODAL_OPEN } from "../../services/actions/ingredientDetails";
 
 export const BurgerIngredient = ({ ingredientData }) => {
   const item = {
@@ -23,7 +24,7 @@ export const BurgerIngredient = ({ ingredientData }) => {
         ref={drag}
         className={ingredientCardStyle.ingredients__listCard}
         onClick={() => dispatch({
-          type: "INGREDIENT_DETAILS_MODAL_OPEN",
+          type: INGREDIENT_DETAILS_MODAL_OPEN,
           payload: ingredientData,
         })
         }>
@@ -44,14 +45,10 @@ export const BurgerIngredient = ({ ingredientData }) => {
 BurgerIngredient.propTypes = {
   isModalOpened: bool,
   onClick: func,
-  image: string,
-  price: number,
-  name: string,
+  ingredientData: object,
   onClose: func,
   ref: element,
   className: string,
-  type: string,
   count: number,
-  src: string,
-  alt: string,
+  
 };

@@ -3,6 +3,7 @@ import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { Modal } from "../Modal/Modal";
 import ingredientsDetailsStyle from "./IngredientsDetails.module.css";
+import { INGREDIENT_DETAILS_MODAL_CLOSE } from "../../services/actions/ingredientDetails";
 
 export const IngredientsDetails = () => {
   const { status, data: ingredient } = useAppSelector(
@@ -13,7 +14,7 @@ export const IngredientsDetails = () => {
   if (status === "CLOSED") return null;
 
   return (
-    <Modal onClose={() => dispatch({ type: "INGREDIENT_DETAILS_MODAL_CLOSE" })}>
+    <Modal onClose={() => dispatch({ type: INGREDIENT_DETAILS_MODAL_CLOSE })}>
       <div className={ingredientsDetailsStyle.modal__titleContainer}>
         <p className="text text_type_main-large">Детали ингредиента</p>
       </div>
