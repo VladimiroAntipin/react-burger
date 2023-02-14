@@ -1,14 +1,34 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { any, array, bool, func, string } from "prop-types";
 import { useEffect, useRef, useState } from "react";
 import { reverse } from "../../utils/reverse";
 import { BurgerIngredientGroup } from "../BurgerIngredientGroup/BurgerIngredientGroup";
 import burgerIngredientsStyle from "./BurgerIngredients.module.css";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { useCallback } from "react";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
+import { INGREDIENT_DETAILS_MODAL_CLOSE, INGREDIENT_DETAILS_MODAL_OPEN } from "../../services/actions/ingredientDetails";
+import { Modal } from "../Modal/Modal";
+import { IngredientsDetails } from "../IngredientsDetails/IngredientsDetails";
 
 const INGREDIENT_GROUPS = ["bun", "sauce", "main"];
 const SCROLL_MARGIN = 50;
 
 export function BurgerIngredients() {
+  const ingredient = useAppSelector((store) => store.ingredientDetails.data);
+
+  const dispatch = useAppDispatch();
+
+  const showIngredientDetails = useCallback((item) => {
+    dispatch({
+      type: INGREDIENT_DETAILS_MODAL_OPEN,
+      payload: item,
+    });
+  }, []);
+
+  const closeIngredientDetails = () => {
+    dispatch({ type: INGREDIENT_DETAILS_MODAL_CLOSE });
+  };
+
   const [current, setCurrent] = useState("bun");
   const parentRef = useRef(null);
   const groupRefs = {
@@ -57,33 +77,49 @@ export function BurgerIngredients() {
     groupRefs[newCurrent]?.current?.scrollIntoView({
       behavior: "smooth",
     });
-    
+
   return (
     <section className={burgerIngredientsStyle.ingredients}>
-      <h1 className={`${burgerIngredientsStyle.ingredients__title} text text_type_main-large mt-10 mb-5`}>Соберите бургер</h1>
+      <h1
+        className={`${burgerIngredientsStyle.ingredients__title} text text_type_main-large mt-10 mb-5`}
+      >
+        Соберите бургер
+      </h1>
       <div className={burgerIngredientsStyle.ingredients__tab}>
-        <Tab value="bun" active={current === "bun"} onClick={scrollToCurrent}>Булки</Tab>
-        <Tab value="sauce" active={current === "sauce"} onClick={scrollToCurrent}>Соусы</Tab>
-        <Tab value="main" active={current === "main"} onClick={scrollToCurrent}>Начинки</Tab>
+        <Tab value="bun" active={current === "bun"} onClick={scrollToCurrent}>
+          Булки
+        </Tab>
+        <Tab
+          value="sauce"
+          active={current === "sauce"}
+          onClick={scrollToCurrent}
+        >
+          Соусы
+        </Tab>
+        <Tab value="main" active={current === "main"} onClick={scrollToCurrent}>
+          Начинки
+        </Tab>
       </div>
 
-      <div ref={parentRef} className={burgerIngredientsStyle.ingredients__ingredientsContainer}>
+      <div
+        ref={parentRef}
+        className={burgerIngredientsStyle.ingredients__ingredientsContainer}
+      >
         {INGREDIENT_GROUPS.map((groupName) => (
           <BurgerIngredientGroup
             key={groupName}
             ref={groupRefs[groupName]}
-            ingredientType={groupName} />
+            ingredientType={groupName}
+            showIngredientDetails={showIngredientDetails}
+          />
         ))}
       </div>
+
+      {ingredient && (
+        <Modal onClose={closeIngredientDetails} title="Детали ингредиента">
+          <IngredientsDetails ingredient={ingredient} />
+        </Modal>
+      )}
     </section>
   );
 }
-
-BurgerIngredients.propTypes = {
-  onClick: func,
-  value: string,
-  active: bool,
-  ingredientsList: array,
-  title: string,
-  className: string,
-};

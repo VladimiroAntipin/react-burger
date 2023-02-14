@@ -3,7 +3,7 @@ import { checkResponse } from "../../utils/checkResponse";
 
 export const SEND_ORDER_FAILED = "SEND_ORDER_FAILED";
 export const SEND_ORDER_IS_LOADING = "SEND_ORDER_IS_LOADING";
-export const SEND_ORDER_STALE = "SEND_ORDER_STALE";
+export const CLEAR_ORDER = "CLEAR_ORDER";
 export const SEND_ORDER_SUCCESS = "SEND_ORDER_SUCCESS";
 
 export const makeOrder = (ingredientsIds) => async (dispatch) => {
@@ -31,4 +31,3 @@ export const makeOrder = (ingredientsIds) => async (dispatch) => {
       payload: result,
     });
   };
-  

@@ -1,6 +1,5 @@
 import { createRoot } from "react-dom/client";
 import App from "./components/App/App";
-import { AppModals } from "./components/AppModals/AppModals";
 import { AppProvider } from "./providers/AppProvider";
 
 const rootElement = document.querySelector("#root");
@@ -14,6 +13,5 @@ const root = createRoot(rootElement);
 root.render(
   <AppProvider>
     <App />
-    <AppModals />
   </AppProvider>
 );

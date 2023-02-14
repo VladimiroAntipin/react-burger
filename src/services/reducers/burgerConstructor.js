@@ -1,7 +1,9 @@
-import { CONSTRUCTOR_ADD_INGREDIENT } from "../actions/burgerConstructor";
-import { CONSTRUCTOR_DELETE_INGREDIENT } from "../actions/burgerConstructor";
-import { CONSTRUCTOR_MOVE_INGREDIENT } from "../actions/burgerConstructor";
-import { CONSTRUCTOR_RESET_INGREDIENT } from "../actions/burgerConstructor";
+import {
+  CONSTRUCTOR_ADD_INGREDIENT,
+  CONSTRUCTOR_DELETE_INGREDIENT,
+  CONSTRUCTOR_MOVE_INGREDIENT,
+  CONSTRUCTOR_RESET_INGREDIENT,
+} from "../actions/burgerConstructor";
 
 const initialState = {
   bun: null,

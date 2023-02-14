@@ -1,7 +1,7 @@
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { atom } from "jotai";
 import { useAtom } from "jotai/react";
-import { bool, element, string } from "prop-types";
+import { number, object  } from "prop-types";
 import { useLayoutEffect } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
@@ -11,6 +11,7 @@ import { mergeRefs } from "../../utils/mergeRefs";
 import { ingredientToConstructorElementProps } from "../BurgerConstructor/BurgerConstructor";
 import burgerConstructorStyle from "../BurgerConstructor/BurgerConstructor.module.css";
 import { CONSTRUCTOR_MOVE_INGREDIENT, CONSTRUCTOR_DELETE_INGREDIENT } from "../../services/actions/burgerConstructor";
+import { ingredientPropTypes } from "../../utils/types";
 
 
 
@@ -85,10 +86,6 @@ export function BurgerConstructorIngredient({ index, ingredient }) {
 }
 
 BurgerConstructorIngredient.propTypes = {
-  className: string,
-  ref: element,
-  DragIcon: element,
-  ConstructorElement: element,
-  type: string,
-  isDragging: bool,
+  index: number,
+  ingredient: ingredientPropTypes.isRequired,
 };

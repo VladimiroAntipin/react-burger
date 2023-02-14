@@ -7,5 +7,4 @@ export const ModalOverlay = ({ onClick }) => (
 
 ModalOverlay.propTypes = {
   onClick: func,
-  className: string,
 };

@@ -2,25 +2,24 @@ import { INGREDIENT_DETAILS_MODAL_OPEN } from "../actions/ingredientDetails";
 import { INGREDIENT_DETAILS_MODAL_CLOSE } from "../actions/ingredientDetails";
 
 const initialState = {
-  status: "CLOSED",
+  data: null,
 };
 
 export const ingredientDetailsReducer = (state = initialState, action) => {
   switch (action.type) {
     case INGREDIENT_DETAILS_MODAL_CLOSE: {
       return {
-        status: "CLOSED"
-      }
+        data: null,
+      };
     }
 
     case INGREDIENT_DETAILS_MODAL_OPEN: {
       return {
-        status: "OPENED",
-        data: action.payload
-      }
+        data: action.payload,
+      };
     }
     default: {
-      return state
+      return state;
     }
   }
-}
+};

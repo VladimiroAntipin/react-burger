@@ -1,5 +1,5 @@
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { func, node, string } from "prop-types";
+import { func, node } from "prop-types";
 import { useEffect } from "react";
 import { ModalOverlay } from "../ModalOverlay/ModalOverlay";
 import { Portal } from "../Portal/Portal";
@@ -35,6 +35,4 @@ export const Modal = ({ onClose, children }) => {
 Modal.propTypes = {
   children: node,
   onClose: func,
-  className: string,
-  type: string,
 };

@@ -1,5 +1,4 @@
 import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import { bool, func, number, string } from "prop-types";
 import { useMemo } from "react";
 import { useDrop } from "react-dnd";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
@@ -7,7 +6,11 @@ import { useSelectedIngredients, useSelectedIngredientsIds, useSelectedIngredien
 import { makeOrder } from "../../services/actions/orderObject";
 import { BurgerConstructorIngredient } from "../BurgerConstructorIngredient/BurgerConstructorIngredient";
 import burgerConstructorStyle from "./BurgerConstructor.module.css";
-import { CONSTRUCTOR_ADD_INGREDIENT } from "../../services/actions/burgerConstructor";
+import { CONSTRUCTOR_ADD_INGREDIENT, CONSTRUCTOR_RESET_INGREDIENT } from "../../services/actions/burgerConstructor";
+import { OrderDetails } from "../OrderDetails/OrderDetails";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { CLEAR_ORDER } from "../../services/actions/orderObject";
+import { Modal } from "../Modal/Modal";
 
 export const ingredientToConstructorElementProps = (ingredient) => ({
   price: ingredient?.price ?? 0,
@@ -51,6 +54,17 @@ const useBun = () => {
 };
 
 export function BurgerConstructor() {
+  const order = useAppSelector((store) => store.orderObject.data);
+
+  const showOrderDetails = () => {
+    dispatch(makeOrder(selectedIngredientsIds))
+};
+
+  const closeOrderDetails = () => {
+    dispatch({ type: CLEAR_ORDER });
+    dispatch({ type: CONSTRUCTOR_RESET_INGREDIENT})
+  }; 
+
   const totalPrice = useSelectedIngredientsPrice();
   const dispatch = useAppDispatch();
   const [, dropRef] = useDrop({
@@ -95,7 +109,7 @@ export function BurgerConstructor() {
         <Button
           disabled={selectedIngredientsIds.length === 0 || !selectedBun}
           htmlType="button"
-          onClick={() => dispatch(makeOrder(selectedIngredientsIds))}
+          onClick={showOrderDetails}
           type="primary"
           size="large"
           extraClass="mr-4"
@@ -103,18 +117,12 @@ export function BurgerConstructor() {
           Оформить заказ
         </Button>
       </div>
+
+      {order && (
+        <Modal onClose={closeOrderDetails} >
+          <OrderDetails order={order} />
+        </Modal>
+      )}
     </section>
   );
 }
-
-BurgerConstructor.propTypes = {
-  price: number,
-  thumbnail: string,
-  text: string,
-  totalPrice: number,
-  isLocked: bool,
-  disabled: bool,
-  onClick: func,
-  className: string,
-  extraClass: string,
-};
