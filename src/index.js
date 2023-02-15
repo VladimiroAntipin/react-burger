@@ -1,5 +1,6 @@
 import { createRoot } from "react-dom/client";
 import App from "./components/App/App";
+import { AppProvider } from "./providers/AppProvider";
 
 const rootElement = document.querySelector("#root");
 
@@ -9,4 +10,8 @@ if (!rootElement) {
 
 const root = createRoot(rootElement);
 
-root.render(<App />);
+root.render(
+  <AppProvider>
+    <App />
+  </AppProvider>
+);

@@ -1,24 +1,34 @@
-import {
-  Counter,
-  CurrencyIcon,
-} from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState } from "react";
-import { IngredientsDetails } from "../IngredientsDetails/IngredientsDetails";
+import { Counter, CurrencyIcon, } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useDrag } from "react-dnd";
+import { useBasketCountOf } from "../../hooks/useBasketCountOf";
 import ingredientCardStyle from "./BurgerIngredient.module.css";
-import { bool, func, number, string } from "prop-types";
+import { ingredientPropTypes } from "../../utils/types";
+import PropTypes from "prop-types";
 
-export const BurgerIngredient = ({ ingredientData }) => {
-  const [isModalOpened, setModalOpened] = useState(false);
+export const BurgerIngredient = ({ ingredientData, showIngredientDetails }) => {
+  const item = {
+    ingredientId: ingredientData._id,
+    type: ingredientData.type,
+  };
+
+  const [, drag] = useDrag({
+    type: "ingredient",
+    item,
+  });
+
+  const onClick = () => {
+    showIngredientDetails(ingredientData);
+  };
 
   return (
     <>
       <div
+        ref={drag}
         className={ingredientCardStyle.ingredients__listCard}
-        onClick={() => setModalOpened(true)}
+        onClick={onClick}
       >
-        <Counter size="default" />
-        <img src={ingredientData.image} alt="ingredient" />
-
+        <Counter count={useBasketCountOf(ingredientData._id)} size="default" />
+        <img src={ingredientData.image} alt={ingredientData.name} />
         <div
           className={`${ingredientCardStyle.ingredients__priceContainer} mb-2`}
         >
@@ -27,25 +37,13 @@ export const BurgerIngredient = ({ ingredientData }) => {
           </p>
           <CurrencyIcon type="primary" />
         </div>
-
         <p className="text text_type_main-small">{ingredientData.name}</p>
       </div>
-
-      {isModalOpened && (
-        <IngredientsDetails
-          {...ingredientData}
-          onClose={() => setModalOpened(false)}
-        />
-      )}
     </>
   );
 };
 
 BurgerIngredient.propTypes = {
-  isModalOpened: bool,
-  onClick: func,
-  image: string,
-  price: number,
-  name: string,
-  onClose: func,
-}
+  ingredientData: ingredientPropTypes.isRequired,
+  showIngredientDetails: PropTypes.func.isRequired,
+};

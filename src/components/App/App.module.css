@@ -1,3 +1,10 @@
 .App {
   text-align: center;
 }
+
+.Main {
+  display: flex;
+  margin: 0 auto;
+  max-width: 1280px;
+  justify-content: center;
+}
