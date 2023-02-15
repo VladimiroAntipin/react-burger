@@ -1,7 +1,8 @@
+import { BASE_URL } from "../services/reducers/fetchReducer";
 import { checkResponse } from "./checkResponse";
 
-export const jsonFetch = (url) =>
-  fetch(url)
+export const jsonFetch = (prefix) =>
+  fetch(`${BASE_URL}${prefix}`)
     .then(checkResponse)
     .then((data) => {
       if (data.success) {

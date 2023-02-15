@@ -1,7 +1,9 @@
-import { SEND_ORDER_FAILED } from "../actions/orderObject";
-import { SEND_ORDER_IS_LOADING } from "../actions/orderObject";
-import { SEND_ORDER_SUCCESS } from "../actions/orderObject";
-import { CLEAR_ORDER } from "../actions/orderObject";
+import {
+  SEND_ORDER_FAILED,
+  SEND_ORDER_IS_LOADING,
+  SEND_ORDER_SUCCESS,
+  CLEAR_ORDER
+} from "../actions/orderObject";
 
 const initialState = {
   data: null,

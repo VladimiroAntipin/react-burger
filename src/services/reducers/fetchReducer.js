@@ -2,9 +2,9 @@ import { checkResponse } from "../../utils/checkResponse";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api/";
 
-export const createFetchReducer = (BASE_URL) => {
+export const createFetchReducer = (url) => {
 
-  const prefix = BASE_URL;
+  const prefix = url;
   const initialState = {
     data: null,
     error: null,
@@ -45,7 +45,7 @@ export const createFetchReducer = (BASE_URL) => {
       dispatch({
         type: `${prefix}-fetch`,
       });
-      const result = await fetch(BASE_URL).then(checkResponse);
+      const result = await fetch(`${BASE_URL}${prefix}`).then(checkResponse);
       dispatch({
         type: `${prefix}-success`,
         payload: result,

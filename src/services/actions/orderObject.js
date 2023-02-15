@@ -7,10 +7,11 @@ export const CLEAR_ORDER = "CLEAR_ORDER";
 export const SEND_ORDER_SUCCESS = "SEND_ORDER_SUCCESS";
 
 export const makeOrder = (ingredientsIds) => async (dispatch) => {
+  try {
     dispatch({
       type: SEND_ORDER_IS_LOADING,
     });
-  
+
     const result = await fetch(`${BASE_URL}orders`, {
       headers: {
         "Content-Type": "application/json",
@@ -19,7 +20,7 @@ export const makeOrder = (ingredientsIds) => async (dispatch) => {
       body: JSON.stringify({ ingredients: ingredientsIds }),
     })
       .then(checkResponse);
-  
+
     if (!result || !result.success) {
       dispatch({
         type: SEND_ORDER_FAILED,
@@ -30,4 +31,7 @@ export const makeOrder = (ingredientsIds) => async (dispatch) => {
       type: SEND_ORDER_SUCCESS,
       payload: result,
     });
-  };
+  } catch (err) {
+    console.error(err);
+  }
+};

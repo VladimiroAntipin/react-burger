@@ -1,5 +1,7 @@
-import { INGREDIENT_DETAILS_MODAL_OPEN } from "../actions/ingredientDetails";
-import { INGREDIENT_DETAILS_MODAL_CLOSE } from "../actions/ingredientDetails";
+import {
+  INGREDIENT_DETAILS_MODAL_OPEN,
+  INGREDIENT_DETAILS_MODAL_CLOSE
+} from "../actions/ingredientDetails";
 
 const initialState = {
   data: null,
