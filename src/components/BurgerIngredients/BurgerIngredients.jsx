@@ -1,14 +1,16 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useEffect, useRef, useState } from "react";
-import { reverse } from "../../utils/reverse";
-import { BurgerIngredientGroup } from "../BurgerIngredientGroup/BurgerIngredientGroup";
-import burgerIngredientsStyle from "./BurgerIngredients.module.css";
-import { useAppSelector } from "../../hooks/useAppSelector";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { MODAL_ID } from "../../constants/modal";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
-import { INGREDIENT_DETAILS_MODAL_CLOSE, INGREDIENT_DETAILS_MODAL_OPEN } from "../../services/actions/ingredientDetails";
-import { Modal } from "../Modal/Modal";
+import { useAppSelector } from "../../hooks/useAppSelector";
+import { INGREDIENT_DETAILS_MODAL_CLOSE } from "../../services/actions/ingredientDetails";
+import { reverse } from "../../utils/reverse";
+import { addModalId } from "../../utils/urlHelpers";
+import { BurgerIngredientGroup } from "../BurgerIngredientGroup/BurgerIngredientGroup";
 import { IngredientsDetails } from "../IngredientsDetails/IngredientsDetails";
+import { Modal } from "../Modal/Modal";
+import burgerIngredientsStyle from "./BurgerIngredients.module.css";
 
 const INGREDIENT_GROUPS = ["bun", "sauce", "main"];
 const SCROLL_MARGIN = 50;
@@ -18,12 +20,16 @@ export function BurgerIngredients() {
 
   const dispatch = useAppDispatch();
 
-  const showIngredientDetails = useCallback((item) => {
-    dispatch({
-      type: INGREDIENT_DETAILS_MODAL_OPEN,
-      payload: item,
-    });
-  }, []);
+  const navigate = useNavigate();
+
+  const showIngredientDetails = useCallback(
+    (ingredientId) => {
+      navigate(
+        addModalId(MODAL_ID.INGREDIENTS, `/ingredients/${ingredientId}`)
+      );
+    },
+    [navigate]
+  );
 
   const closeIngredientDetails = () => {
     dispatch({ type: INGREDIENT_DETAILS_MODAL_CLOSE });

@@ -11,6 +11,7 @@ import { OrderDetails } from "../OrderDetails/OrderDetails";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { CLEAR_ORDER } from "../../services/actions/orderObject";
 import { Modal } from "../Modal/Modal";
+import { useNavigate } from "react-router-dom";
 
 export const ingredientToConstructorElementProps = (ingredient) => ({
   price: ingredient?.price ?? 0,
@@ -55,15 +56,24 @@ const useBun = () => {
 
 export function BurgerConstructor() {
   const order = useAppSelector((store) => store.orderObject.data);
+  const navigate = useNavigate()
+
+  const isUserAuth = useAppSelector(
+    (state) => state.currentSession.isCurrentUserAuth
+  );
 
   const showOrderDetails = () => {
-    dispatch(makeOrder(selectedIngredientsIds))
-};
+    if (isUserAuth) {
+      dispatch(makeOrder(selectedIngredientsIds))
+    } else {
+      navigate("/login");
+    }
+  };
 
   const closeOrderDetails = () => {
     dispatch({ type: CLEAR_ORDER });
-    dispatch({ type: CONSTRUCTOR_RESET_INGREDIENT})
-  }; 
+    dispatch({ type: CONSTRUCTOR_RESET_INGREDIENT })
+  };
 
   const totalPrice = useSelectedIngredientsPrice();
   const dispatch = useAppDispatch();
@@ -107,14 +117,15 @@ export function BurgerConstructor() {
           <CurrencyIcon type="primary" />
         </div>
         <Button
-          disabled={selectedIngredientsIds.length === 0 || !selectedBun}
+          disabled={isUserAuth && selectedIngredientsIds.length === 0 && !selectedBun}
           htmlType="button"
           onClick={showOrderDetails}
           type="primary"
           size="large"
           extraClass="mr-4"
+          
         >
-          Оформить заказ
+          {isUserAuth ? "Оформить заказ" : "Войти в аккаунт"}
         </Button>
       </div>
 

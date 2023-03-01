@@ -1,4 +1,8 @@
 .ingredients__listCard {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
   position: relative;
   width: 272px;
   display: flex;

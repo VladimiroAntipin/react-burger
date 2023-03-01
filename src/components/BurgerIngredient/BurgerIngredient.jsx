@@ -17,12 +17,12 @@ export const BurgerIngredient = ({ ingredientData, showIngredientDetails }) => {
   });
 
   const onClick = () => {
-    showIngredientDetails(ingredientData);
+    showIngredientDetails(ingredientData._id);
   };
 
   return (
     <>
-      <div
+      <button
         ref={drag}
         className={ingredientCardStyle.ingredients__listCard}
         onClick={onClick}
@@ -38,7 +38,7 @@ export const BurgerIngredient = ({ ingredientData, showIngredientDetails }) => {
           <CurrencyIcon type="primary" />
         </div>
         <p className="text text_type_main-small">{ingredientData.name}</p>
-      </div>
+      </button>
     </>
   );
 };

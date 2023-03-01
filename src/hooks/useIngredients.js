@@ -17,9 +17,11 @@ export const useIngredientByType = (type) => {
 export const useIngredientsMap = () => {
   const ingredients = useIngredients();
   return useMemo(() => ingredients.reduce(
-        (acc, ingredient) => ((acc[ingredient._id] = ingredient), acc),
-        {}
-      ),
+    (acc, ingredient) => {
+      return ((acc[ingredient._id] = ingredient), acc);
+    },
+    {}
+  ),
     [ingredients]
   );
 };

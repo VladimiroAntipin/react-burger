@@ -1,7 +1,11 @@
 import ingredientsDetailsStyle from "./IngredientsDetails.module.css";
-import { ingredientPropTypes } from "../../utils/types";
+import { useIngredientById } from "../../hooks/useIngredients";
+import { string } from "prop-types";
 
-export const IngredientsDetails = ({ ingredient }) => {
+export const IngredientsDetails = ({ ingredientId }) => {
+  const ingredient = useIngredientById(ingredientId);
+
+  if (!ingredient) return null;
   return (
     <>
       <div className={ingredientsDetailsStyle.modal__titleContainer}>
@@ -56,5 +60,5 @@ export const IngredientsDetails = ({ ingredient }) => {
 };
 
 IngredientsDetails.propTypes = {
-  ingredient: ingredientPropTypes.isRequired,
+  ingredientId: string.isRequired
 };

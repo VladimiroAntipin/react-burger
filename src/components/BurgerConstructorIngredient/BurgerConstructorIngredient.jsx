@@ -1,7 +1,7 @@
 import { ConstructorElement, DragIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { atom } from "jotai";
 import { useAtom } from "jotai/react";
-import { number, object  } from "prop-types";
+import { number } from "prop-types";
 import { useLayoutEffect } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
