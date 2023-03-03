@@ -15,7 +15,6 @@ export function RegistrationPage() {
     const [name, setName] = React.useState("");
     const [email, setEmail] = React.useState("");
     const [password, setPassword] = React.useState("");
-    const [error, setError] = React.useState("");
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -25,7 +24,7 @@ export function RegistrationPage() {
             email: email,
             password: password,
         };
-        dispatch(registerUser(data, () => navigate("/login"), () => setError('Такой пользователь уже существует')));
+        dispatch(registerUser(data, () => navigate("/login")));
     }
 
     return (
@@ -59,10 +58,6 @@ export function RegistrationPage() {
                         type="primary"
                         size="medium"
                         onClick={(e) => handleSubmit(e)}>Зарегистрироваться</Button>
-
-                    {error && <p className="input__error text_type_main-default">
-                        {error}
-                    </p>}
 
                     <div className={registerStyle.links}>
                         <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы?

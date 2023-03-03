@@ -32,7 +32,6 @@ export function ForgotPasswordPage() {
                             type={"email"}
                             placeholder={"Укажите e-mail"}
                             onChange={(e) => setEmail(e.target.value)}
-                            errorText="Неверный e-mail" 
                         />
                     </form>
 
