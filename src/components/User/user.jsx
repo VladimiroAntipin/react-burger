@@ -1,6 +1,6 @@
 import React from "react";
 import userStyles from "./user.module.css";
-import { Input, Button, } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { editProfile } from "../../services/actions/currentSessionActions/setUserInfo";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
@@ -13,13 +13,48 @@ export function User() {
     const [email, setEmail] = React.useState(currentUser?.email ?? "");
     const [password, setPassword] = React.useState(currentUser?.password ?? "")
 
+    const isButtonDisabled = name === currentUser.name && email === currentUser.email && password.length < 6;
+
+    const [nameDisabled, setNameDisabled] = React.useState(true);
+    const [emailDisabled, setEmailDisabled] = React.useState(true);
+
+    const nameInputRef = React.useRef(null);
+    const emailInputRef = React.useRef(null);
+
+    function onIconClick(input, setState) {
+        setTimeout(() => input.current.focus(), 0);
+        setState(false);
+    }
+
     function handleSubmitChanges() {
-        const data = {
-            name: name,
-            email: email,
-            password: password,
-        }; 
+        if (password.length < 6) {
+            const data = {
+                name: name,
+                email: email,
+            };
             dispatch(editProfile(data))
+        } else {
+            const data = {
+                name: name,
+                email: email,
+                password: password,
+            };
+            dispatch(editProfile(data))
+        }
+    }
+
+    function resetForm() {
+        if (currentUser === null || undefined) {
+            setName('Загрузка...');
+            setEmail('Загрузка...');
+            setPassword('Загрузка...')
+        } else {
+            setName(currentUser.name);
+            setEmail(currentUser.email);
+            setPassword("")
+        }
+        setNameDisabled(true);
+        setEmailDisabled(true);
     }
 
     return (
@@ -31,24 +66,29 @@ export function User() {
                             type={"text"}
                             placeholder={"Имя"}
                             onChange={(e) => setName(e.target.value)}
+                            onIconClick={() => onIconClick(nameInputRef, setNameDisabled)}
                             icon={"EditIcon"}
                             value={name}
                             size={"default"}
+                            disabled={nameDisabled}
+                            ref={nameInputRef}
                         />
                     </li>
                     <li className={`${userStyles.userListItem} mb-6`}>
                         <Input
-                            type={"text"}
+                            type={"email"}
                             placeholder={"Логин"}
                             onChange={(e) => setEmail(e.target.value)}
+                            ref={emailInputRef}
+                            onIconClick={() => onIconClick(emailInputRef, setEmailDisabled)}
                             icon={"EditIcon"}
                             value={email}
                             size={"default"}
+                            disabled={emailDisabled}
                         />
                     </li>
                     <li className={`${userStyles.userListItem} mb-6`}>
-                        <Input
-                            type={"password"}
+                        <PasswordInput
                             placeholder={"Пароль"}
                             onChange={(e) => setPassword(e.target.value)}
                             icon={"EditIcon"}
@@ -58,9 +98,26 @@ export function User() {
                     </li>
                 </ul>
                 <div className={userStyles.buttonBox}>
-                    <Button htmlType="button" type="primary" size="medium" onClick={() => handleSubmitChanges()}>
+
+                    <Button
+                        htmlType="button"
+                        type="secondary"
+                        size="medium"
+                        onClick={() => resetForm()}
+                    >
+                        Отмена
+                    </Button>
+
+                    <Button
+                        htmlType="button"
+                        type="primary"
+                        size="medium"
+                        onClick={() => handleSubmitChanges()}
+                        disabled={isButtonDisabled}
+                    >
                         Сохранить
                     </Button>
+
                 </div>
             </div>
         </>
