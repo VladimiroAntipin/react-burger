@@ -1,11 +1,11 @@
 .modal__titleContainer {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 640px;
   height: 64px;
-  margin: 40px auto;
+  margin: 0px auto;
 }
 
 .modal__ingredientsInfoContainer {
@@ -25,4 +25,8 @@
   width: 520px;
   height: 240px;
   object-fit: contain;
+}
+
+.modal__title {
+  text-align: left;
 }

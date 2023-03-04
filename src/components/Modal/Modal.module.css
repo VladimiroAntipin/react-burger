@@ -10,6 +10,7 @@
   border-radius: 40px;
   z-index: 5;
   text-align: center;
+  padding-top: 40px;
 }
 
 .modal__close-icon {
