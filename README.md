@@ -1,6 +1,7 @@
 # Stellar Burger
+## Учебный проект Яндекс Практикума
+
 ## SPRINT 11 - ВЁРСТКА
-## Учебный проект Яндекс Практикума - Вёрстка
 При создании этого проекта был использован:
 * React;
 * библиотека UI-компонентов от Яндекс Практикума;
@@ -34,8 +35,12 @@
 * Модал с игредиентом остается открытым если обновляем страницу
 * возможность открыть страница с деталей ингредиента по id
 
+## SPRINT 14 - TYPESCRIPT
+* типизация
+* удаление PropTypes
+
 ## Ссылка на GitHub
-Ссылка проекта на GitHub [Stellar Burger - GitHub](https://github.com/VladimiroAntipin/react-burger/tree/sprint-12-branch).
+Ссылка проекта на GitHub [Stellar Burger - GitHub](https://github.com/VladimiroAntipin/react-burger).
 
 ## Available Scripts
 In the project directory, you can run:
