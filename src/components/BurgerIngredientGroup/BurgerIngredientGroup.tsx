@@ -13,10 +13,9 @@ const INGREDIENT_TYPE_TO_TITLE = {
 export const BurgerIngredientGroup = forwardRef<
   HTMLDivElement,
   {
-    showIngredientDetails: (newId: string) => void;
     ingredientType: IngredientType;
   }
->(({ ingredientType, showIngredientDetails }, ref) => (
+>(({ ingredientType }, ref) => (
   <div ref={ref}>
     <h2 className="text text_type_main-medium mb-6 mt-10">
       {INGREDIENT_TYPE_TO_TITLE[ingredientType]}
@@ -24,10 +23,7 @@ export const BurgerIngredientGroup = forwardRef<
     <ul className={ingredientGroupStyle.ingredients__list}>
       {useIngredientByType(ingredientType).map((ingredientData) => (
         <li key={ingredientData._id}>
-          <BurgerIngredient
-            ingredientData={ingredientData}
-            showIngredientDetails={showIngredientDetails}
-          />
+          <BurgerIngredient ingredientData={ingredientData} />
         </li>
       ))}
     </ul>

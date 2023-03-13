@@ -1,19 +1,19 @@
 import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
+import { Link, useLocation } from "react-router-dom";
 import { useBasketCountOf } from "../../hooks/useBasketCountOf";
 import { Ingredient } from "../../utils/types";
+import { LocationState } from "../App/App";
 import ingredientCardStyle from "./BurgerIngredient.module.css";
 
 export const BurgerIngredient = ({
-  ingredientData,
-  showIngredientDetails,
+  ingredientData: { _id: ingredientId, image, price, name, type },
 }: {
   ingredientData: Ingredient;
-  showIngredientDetails: (newId: string) => void;
 }) => {
   const item = {
-    ingredientId: ingredientData._id,
-    type: ingredientData.type,
+    ingredientId,
+    type: type,
   };
 
   const [, drag] = useDrag({
@@ -21,29 +21,30 @@ export const BurgerIngredient = ({
     item,
   });
 
-  const onClick = () => {
-    showIngredientDetails(ingredientData._id);
-  };
+  const locationPathname = useLocation().pathname;
 
   return (
     <>
-      <button
+      <Link
+        to={`/ingredients/${ingredientId}`}
         ref={drag}
+        state={
+          {
+            backgroundUrl: locationPathname,
+          } satisfies LocationState
+        }
         className={ingredientCardStyle.ingredients__listCard}
-        onClick={onClick}
       >
-        <Counter count={useBasketCountOf(ingredientData._id)} size="default" />
-        <img src={ingredientData.image} alt={ingredientData.name} />
+        <Counter count={useBasketCountOf(ingredientId)} size="default" />
+        <img src={image} alt={name} />
         <div
           className={`${ingredientCardStyle.ingredients__priceContainer} mb-2`}
         >
-          <p className="text text_type_digits-default">
-            {ingredientData.price}
-          </p>
+          <p className="text text_type_digits-default">{price}</p>
           <CurrencyIcon type="primary" />
         </div>
-        <p className="text text_type_main-small">{ingredientData.name}</p>
-      </button>
+        <p className="text text_type_main-small">{name}</p>
+      </Link>
     </>
   );
 };

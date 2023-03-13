@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import { MODAL_ID } from "../../constants/modal";
+import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { ForgotPasswordPage } from "../../pages/ForgotPassword/forgot-password";
 import { HomePage } from "../../pages/Homepage/Homepage";
@@ -12,28 +11,31 @@ import { RegistrationPage } from "../../pages/Register/register";
 import { ResetPasswordPage } from "../../pages/ResetPassword/reset-password";
 import { checkUserAuth } from "../../services/actions/currentSessionActions/checkUserAuth";
 import { getIngredients } from "../../services/reducers/ingredients";
-import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
-import { RoutesWithModal } from "../RoutesWithModal/RoutesWithModal";
+import { IngredientDetailsWithParams } from "../IngredientsDetails/IngredientsDetails";
 
-function App() {
+import { Modal } from "../Modal/Modal";
+import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
+
+export type LocationState = {
+  backgroundUrl: string;
+};
+
+function AppContent() {
   const dispatch = useAppDispatch();
+  const location = useLocation();
+  const locationState = location.state as null | LocationState;
 
   useEffect(() => {
     dispatch(getIngredients());
     dispatch(checkUserAuth());
   }, [dispatch]);
+  const navigate = useNavigate();
 
   return (
-    <Router>
-      <RoutesWithModal>
-        <RoutesWithModal.Route
-          index
-          modalId={MODAL_ID.INGREDIENTS}
-          modalHandler
-          element={<HomePage />}
-        />
-
-        <RoutesWithModal.Route
+    <>
+      <Routes location={locationState?.backgroundUrl ?? location}>
+        <Route index element={<HomePage />} />
+        <Route
           path="/register"
           element={
             <ProtectedRoute authorized={false}>
@@ -41,8 +43,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-
-        <RoutesWithModal.Route
+        <Route
           path="/login"
           element={
             <ProtectedRoute authorized={false}>
@@ -50,8 +51,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-
-        <RoutesWithModal.Route
+        <Route
           path="/forgot-password"
           element={
             <ProtectedRoute authorized={false}>
@@ -59,8 +59,7 @@ function App() {
             </ProtectedRoute>
           }
         />
-
-        <RoutesWithModal.Route
+        <Route
           path="/reset-password"
           element={
             <ProtectedRoute authorized={false}>
@@ -68,16 +67,9 @@ function App() {
             </ProtectedRoute>
           }
         />
-
-        <RoutesWithModal.Route path="/*" element={<NotFound404 />} />
-
-        <RoutesWithModal.Route
-          modalId={MODAL_ID.INGREDIENTS}
-          path="/ingredients/:id"
-          element={<IngredientsDetailsPage />}
-        />
-
-        <RoutesWithModal.Route
+        <Route path="/*" element={<NotFound404 />} />
+        <Route path="/ingredients/:id" element={<IngredientsDetailsPage />} />
+        <Route
           path="/profile/*"
           element={
             <ProtectedRoute authorized={true}>
@@ -85,9 +77,27 @@ function App() {
             </ProtectedRoute>
           }
         />
-      </RoutesWithModal>
-    </Router>
+      </Routes>
+      {locationState?.backgroundUrl && (
+        <Routes>
+          <Route
+            path="/ingredients/:id"
+            element={
+              <Modal onClose={() => navigate(-1)}>
+                <IngredientDetailsWithParams />
+              </Modal>
+            }
+          />
+        </Routes>
+      )}
+    </>
   );
 }
+
+const App = () => (
+  <Router>
+    <AppContent />
+  </Router>
+);
 
 export default App;

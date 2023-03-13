@@ -3,8 +3,8 @@ import AppHeader from "../../components/AppHeader/AppHeader";
 import { NavLink, Route, Routes } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { logoutUser } from "../../services/actions/currentSessionActions/logoutUser";
+import { OrderHistory } from "../../components/OrderHistory/OrderHistory";
 import { User } from "../../components/User/user";
-import { OrderHistory } from "../../components/OrderHistory/orderHistory";
 
 export function ProfilePage() {
   const dispatch = useAppDispatch();

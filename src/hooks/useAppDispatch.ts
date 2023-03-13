@@ -1,5 +1,7 @@
 import { useDispatch } from "react-redux";
-import { AppDispatch } from "../services/store";
+import { ThunkDispatch } from "redux-thunk";
+import { AppAction, AppStore } from "../services/store";
 
-type TGetDispatch = () => AppDispatch;
-export const useAppDispatch: TGetDispatch = useDispatch;
+type GetDispatch = () => ThunkDispatch<AppStore, unknown, AppAction>;
+
+export const useAppDispatch: GetDispatch = useDispatch;

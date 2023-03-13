@@ -7,7 +7,7 @@ import { useAppSelector } from "../../hooks/useAppSelector";
 import { useSelectedIngredients, useSelectedIngredientsIds, useSelectedIngredientsPrice } from "../../hooks/useSelectedIngredients";
 import { CONSTRUCTOR_ADD_INGREDIENT, CONSTRUCTOR_RESET_INGREDIENT } from "../../services/actions/burgerConstructor";
 import { CLEAR_ORDER, makeOrder } from "../../services/actions/orderObject";
-import { Ingredient } from "../../utils/types";
+import { Ingredient, IngredientType } from "../../utils/types";
 import { BurgerConstructorIngredient } from "../BurgerConstructorIngredient/BurgerConstructorIngredient";
 import { Modal } from "../Modal/Modal";
 import { OrderDetails } from "../OrderDetails/OrderDetails";
@@ -85,7 +85,7 @@ export function BurgerConstructor() {
     drop: (data) =>
       dispatch({
         type: CONSTRUCTOR_ADD_INGREDIENT,
-        payload: data,
+        payload: data as { ingredientId: string; type: IngredientType },
       }),
   });
 

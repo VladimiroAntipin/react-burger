@@ -1,7 +1,12 @@
 import { useIngredientById } from "../../hooks/useIngredients";
 import ingredientsDetailsStyle from "./IngredientsDetails.module.css";
+import { useParams } from "react-router-dom";
 
-export const IngredientsDetails = ({ ingredientId }: { ingredientId: string }) => {
+export const IngredientDetails = ({
+  ingredientId,
+}: {
+  ingredientId: string;
+}) => {
   const ingredient = useIngredientById(ingredientId);
 
   if (!ingredient) return null;
@@ -57,3 +62,7 @@ export const IngredientsDetails = ({ ingredientId }: { ingredientId: string }) =
     </>
   );
 };
+
+export const IngredientDetailsWithParams = () => (
+  <IngredientDetails ingredientId={useParams().id as string} />
+);

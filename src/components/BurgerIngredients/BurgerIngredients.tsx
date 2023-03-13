@@ -1,15 +1,12 @@
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useCallback, useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { MODAL_ID } from "../../constants/modal";
+import { useEffect, useRef, useState } from "react";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { INGREDIENT_DETAILS_MODAL_CLOSE } from "../../services/actions/ingredientDetails";
 import { reverse } from "../../utils/reverse";
 import { IngredientType } from "../../utils/types";
-import { addModalId } from "../../utils/urlHelpers";
 import { BurgerIngredientGroup } from "../BurgerIngredientGroup/BurgerIngredientGroup";
-import { IngredientsDetails } from "../IngredientsDetails/IngredientsDetails";
+import { IngredientDetails } from "../IngredientsDetails/IngredientsDetails";
 import { Modal } from "../Modal/Modal";
 import burgerIngredientsStyle from "./BurgerIngredients.module.css";
 
@@ -20,17 +17,6 @@ export function BurgerIngredients() {
   const ingredient = useAppSelector((store) => store.ingredientDetails.data);
 
   const dispatch = useAppDispatch();
-
-  const navigate = useNavigate();
-
-  const showIngredientDetails = useCallback(
-    (ingredientId: string) => {
-      navigate(
-        addModalId(MODAL_ID.INGREDIENTS, `/ingredients/${ingredientId}`)
-      );
-    },
-    [navigate]
-  );
 
   const closeIngredientDetails = () => {
     dispatch({ type: INGREDIENT_DETAILS_MODAL_CLOSE });
@@ -121,14 +107,13 @@ export function BurgerIngredients() {
             key={groupName}
             ref={groupRefs[groupName]}
             ingredientType={groupName}
-            showIngredientDetails={showIngredientDetails}
           />
         ))}
       </div>
 
       {ingredient && (
         <Modal onClose={closeIngredientDetails}>
-          <IngredientsDetails ingredientId={ingredient._id} />
+          <IngredientDetails ingredientId={ingredient._id} />
         </Modal>
       )}
     </section>

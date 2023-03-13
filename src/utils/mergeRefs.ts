@@ -1,12 +1,12 @@
 export const mergeRefs =
-  (...refs: any) =>
-  (item: any) => {
-    refs.forEach((ref: any) => {
-      if (!ref) return;
-      if (typeof ref === "function") {
-        ref(item);
-        return;
-      }
-      ref.current = item;
-    });
-  };
+<T>(...refs: React.Ref<T>[]) =>
+(item: T | null) => {
+  refs.forEach((ref) => {
+    if (!ref) return;
+    if (typeof ref === "function") {
+      ref(item);
+      return;
+    }
+    (ref as React.MutableRefObject<T | null>).current = item;
+  });
+};

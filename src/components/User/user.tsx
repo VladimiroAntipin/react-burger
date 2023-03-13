@@ -1,28 +1,36 @@
-import React from "react";
-import userStyles from "./user.module.css";
-import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
+import React, { Dispatch, SetStateAction } from "react";
+import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
 import { editProfile } from "../../services/actions/currentSessionActions/setUserInfo";
-import { useAppDispatch } from "../../hooks/useAppDispatch";
+import userStyles from "./User.module.css";
 
 export function User() {
-    const currentUser = useAppSelector((state) => state.currentSession.currentUser);
+    const currentUser = useAppSelector(
+        (state) => state.currentSession.currentUser
+    );
     const dispatch = useAppDispatch();
 
     const [name, setName] = React.useState(currentUser?.name ?? "");
     const [email, setEmail] = React.useState(currentUser?.email ?? "");
-    const [password, setPassword] = React.useState(currentUser?.password ?? "")
+    const [password, setPassword] = React.useState("");
 
-    const isButtonDisabled = name === currentUser.name && email === currentUser.email && password.length < 6;
+    const isButtonDisabled =
+        name === currentUser?.name &&
+        email === currentUser?.email &&
+        password.length < 6;
 
     const [nameDisabled, setNameDisabled] = React.useState(true);
     const [emailDisabled, setEmailDisabled] = React.useState(true);
 
-    const nameInputRef = React.useRef(null);
-    const emailInputRef = React.useRef(null);
+    const nameInputRef = React.useRef<HTMLInputElement>(null);
+    const emailInputRef = React.useRef<HTMLInputElement>(null);
 
-    function onIconClick(input: any, setState: any ) {
-        setTimeout(() => input.current.focus(), 0);
+    function onIconClick(
+        input: React.RefObject<HTMLInputElement>,
+        setState: Dispatch<SetStateAction<boolean>>
+    ) {
+        setTimeout(() => input.current?.focus?.(), 0);
         setState(false);
     }
 
@@ -32,26 +40,26 @@ export function User() {
                 name: name,
                 email: email,
             };
-            dispatch(editProfile(data))
+            dispatch(editProfile(data));
         } else {
             const data = {
                 name: name,
                 email: email,
                 password: password,
             };
-            dispatch(editProfile(data))
+            dispatch(editProfile(data));
         }
     }
 
     function resetForm() {
         if (currentUser === null || undefined) {
-            setName('Загрузка...');
-            setEmail('Загрузка...');
-            setPassword('Загрузка...')
+            setName("Загрузка...");
+            setEmail("Загрузка...");
+            setPassword("Загрузка...");
         } else {
             setName(currentUser.name);
             setEmail(currentUser.email);
-            setPassword("")
+            setPassword("");
         }
         setNameDisabled(true);
         setEmailDisabled(true);
@@ -98,7 +106,6 @@ export function User() {
                     </li>
                 </ul>
                 <div className={userStyles.buttonBox}>
-
                     <Button
                         htmlType="button"
                         type="secondary"
@@ -117,7 +124,6 @@ export function User() {
                     >
                         Сохранить
                     </Button>
-
                 </div>
             </div>
         </>
