@@ -2,7 +2,6 @@ import React from "react";
 import forgotPasswordStyle from "./forgot-password.module.css";
 import { Input, Button } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
-import AppHeader from "../../components/AppHeader/AppHeader";
 import { resetPassword } from "../../utils/sessionApi";
 
 export function ForgotPasswordPage() {
@@ -23,26 +22,27 @@ export function ForgotPasswordPage() {
 
     return (
         <>
-            <AppHeader />
             <div className={forgotPasswordStyle.background}>
                 <div className={forgotPasswordStyle.container}>
                     <h1 className="text text_type_main-medium mb-6">Восстановление пароля</h1>
-                    <form className={forgotPasswordStyle.form}>
+                    <form className={forgotPasswordStyle.form} onSubmit={handleSubmit}>
                         <Input
                             type={"email"}
-                            value=""
+                            value={email}
                             placeholder={"Укажите e-mail"}
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                    </form>
+                        <div className={forgotPasswordStyle.buttonBox}>
+                            <Button
+                                htmlType={"submit"}
+                                type={"primary"}
+                                size={"medium"}
+                            >
+                                Восстановить
+                            </Button>
+                        </div>
 
-                    <Button
-                        htmlType={"button"}
-                        type={"primary"}
-                        size={"medium"}
-                        onClick={handleSubmit}>
-                        Восстановить
-                    </Button>
+                    </form>
 
                     <div className={forgotPasswordStyle.links}>
                         <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?

@@ -1,5 +1,4 @@
 import profileStyle from "./profile.module.css";
-import AppHeader from "../../components/AppHeader/AppHeader";
 import { NavLink, Route, Routes } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { logoutUser } from "../../services/actions/currentSessionActions/logoutUser";
@@ -18,7 +17,6 @@ export function ProfilePage() {
 
   return (
     <>
-      <AppHeader />
       <div className={profileStyle.background}>
         <div className={profileStyle.container}>
           <div className={profileStyle.buttonsContainer}>

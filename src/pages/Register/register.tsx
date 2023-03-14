@@ -4,7 +4,6 @@ import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burg
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { registerUser } from "../../services/actions/currentSessionActions/registration";
-import AppHeader from "../../components/AppHeader/AppHeader";
 
 export function RegistrationPage() {
     const dispatch = useAppDispatch();
@@ -27,11 +26,10 @@ export function RegistrationPage() {
 
     return (
         <>
-            <AppHeader />
             <div className={registerStyle.background}>
                 <div className={registerStyle.container}>
                     <h1 className="text text_type_main-medium mb-6">Регистрация</h1>
-                    <form className={registerStyle.form}>
+                    <form className={registerStyle.form} onSubmit={handleSubmit}>
                         <Input
                             type={"text"}
                             placeholder={"Имя"}
@@ -50,13 +48,16 @@ export function RegistrationPage() {
                             size="default"
                             onChange={(e) => setPassword(e.target.value)}
                             value={password} />
-                    </form>
 
-                    <Button
-                        htmlType="submit"
-                        type="primary"
-                        size="medium"
-                        onClick={(e) => handleSubmit(e)}>Зарегистрироваться</Button>
+                        <div className={registerStyle.buttonBox}>
+                            <Button
+                                htmlType="submit"
+                                type="primary"
+                                size="medium"
+                            >Зарегистрироваться
+                            </Button>
+                        </div>
+                    </form>
 
                     <div className={registerStyle.links}>
                         <p className="text text_type_main-default text_color_inactive">Уже зарегистрированы?

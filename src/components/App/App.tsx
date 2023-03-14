@@ -11,8 +11,8 @@ import { RegistrationPage } from "../../pages/Register/register";
 import { ResetPasswordPage } from "../../pages/ResetPassword/reset-password";
 import { checkUserAuth } from "../../services/actions/currentSessionActions/checkUserAuth";
 import { getIngredients } from "../../services/reducers/ingredients";
+import AppHeader from "../AppHeader/AppHeader";
 import { IngredientDetailsWithParams } from "../IngredientsDetails/IngredientsDetails";
-
 import { Modal } from "../Modal/Modal";
 import { ProtectedRoute } from "../ProtectedRoute/ProtectedRoute";
 
@@ -96,6 +96,7 @@ function AppContent() {
 
 const App = () => (
   <Router>
+    <AppHeader />
     <AppContent />
   </Router>
 );

@@ -2,7 +2,6 @@ import React from "react";
 import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import loginStyle from "./login.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import AppHeader from "../../components/AppHeader/AppHeader";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { loginUser } from "../../services/actions/currentSessionActions/loginUser";
 
@@ -24,11 +23,10 @@ export function LoginPage() {
 
     return (
         <>
-            <AppHeader />
             <div className={loginStyle.background}>
                 <div className={loginStyle.container}>
                     <h1 className="text text_type_main-medium mb-6">Вход</h1>
-                    <form className={loginStyle.form}>
+                    <form className={loginStyle.form} onSubmit={handleSubmit}>
                         <Input
                             type="email"
                             placeholder="E-mail"
@@ -43,14 +41,17 @@ export function LoginPage() {
                             value={password}
                             size="default"
                         />
+
+                        <div className={loginStyle.buttonBox}>
+                            <Button
+                                htmlType="submit"
+                                type="primary"
+                                size="medium"
+                            >Войти</Button>
+                        </div>
                     </form>
 
-                    <Button
-                        htmlType="submit"
-                        type="primary"
-                        size="medium"
-                        onClick={(e) => handleSubmit(e)}
-                    >Войти</Button>
+
 
                     <div className={loginStyle.links}>
                         <p className="text text_type_main-default text_color_inactive">Вы — новый пользователь?

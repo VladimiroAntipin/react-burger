@@ -2,7 +2,6 @@ import React from "react";
 import resetPasswordStyle from "./reset-password.module.css";
 import { Input, Button, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
-import AppHeader from "../../components/AppHeader/AppHeader";
 import { updatePassword } from "../../utils/sessionApi";
 
 export function ResetPasswordPage() {
@@ -31,11 +30,10 @@ export function ResetPasswordPage() {
 
     return (
         <>
-            <AppHeader />
             <div className={resetPasswordStyle.background}>
                 <div className={resetPasswordStyle.container}>
                     <h1 className="text text_type_main-medium mb-6">Восстановление пароля</h1>
-                    <form className={resetPasswordStyle.form}>
+                    <form className={resetPasswordStyle.form} onSubmit={handleSubmit}>
                         <PasswordInput
                             placeholder={"Введите новый пароль"}
                             icon="ShowIcon"
@@ -49,13 +47,18 @@ export function ResetPasswordPage() {
                             onChange={(e) => setToken(e.target.value)}
                             value={token}
                         />
+
+                        <div className={resetPasswordStyle.buttonBox}>
+                            <Button
+                                htmlType="submit"
+                                type="primary"
+                                size="medium"
+                            >Сохранить
+                            </Button>
+                        </div>
                     </form>
 
-                    <Button
-                        htmlType="button"
-                        type="primary"
-                        size="medium"
-                        onClick={(e) => handleSubmit(e)}>Сохранить</Button>
+
 
                     <div className={resetPasswordStyle.links}>
                         <p className="text text_type_main-default text_color_inactive">Вспомнили пароль?
