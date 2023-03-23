@@ -39,6 +39,11 @@
 * типизация
 * удаление PropTypes
 
+## SPRINT 15 - WEBSOCKET
+* добавление лента заказов и заказов пользователья
+* подключение WS
+* добавление модал и страницы с деталями заказа
+
 ## Ссылка на GitHub
 Ссылка проекта на GitHub [Stellar Burger - GitHub](https://github.com/VladimiroAntipin/react-burger).
 
