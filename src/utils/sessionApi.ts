@@ -1,25 +1,16 @@
-import { RegisterRequestData, SignInRequestData, SignInResponse, UserData, UserResponse } from "./types";
 import { BASE_URL } from "../services/reducers/fetchReducer";
 import { checkResponse } from "./checkResponse";
-import { fetchWithRefreshToken } from "./fetchWithRefreshToken";
+import { fetchEnchanced } from "./fetchWithRefreshToken";
+import { Tokens } from "./tokens";
+import { RegisterRequestData, SignInRequestData, SignInResponse, UserData, UserResponse } from "./types";
 
-export const getUserInfo = (accessToken: string) =>
-  fetchWithRefreshToken<UserResponse>(`${BASE_URL}auth/user`, {
-    method: "GET",
-    headers: {
-      Authorization: accessToken,
-      "Content-Type": "application/json",
-    },
-  });
+export const getUserInfo = () =>
+  fetchEnchanced<UserResponse>(`${BASE_URL}auth/user`);
 
-export const setUserInfo = (data: UserData, accessToken: string) =>
-  fetchWithRefreshToken<UserResponse>(`${BASE_URL}auth/user`, {
+export const setUserInfo = (data: UserData) =>
+  fetchEnchanced<UserResponse>(`${BASE_URL}auth/user`, {
     method: "PATCH",
-    headers: {
-      Authorization: accessToken,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
+    json: data,
   });
 
 export const signOut = () => {
@@ -29,7 +20,7 @@ export const signOut = () => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      token: localStorage.getItem("refreshToken"),
+      token: Tokens.accessToken,
     }),
   }).then(checkResponse);
 };

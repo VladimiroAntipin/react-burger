@@ -24,7 +24,7 @@ export const Modal = ({ onClose, children }: PropsWithChildren<{ onClose: () => 
   return (
     <Portal>
       <ModalOverlay onClick={onClose} />
-      <section className={modalStyles.modal}>
+      <section aria-modal className={modalStyles.modal}>
         <div className={modalStyles["modal__close-icon"]}>
           <CloseIcon type="primary" onClick={onClose} />
         </div>
