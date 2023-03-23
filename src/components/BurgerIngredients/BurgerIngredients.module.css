@@ -1,0 +1,38 @@
+.ingredients {
+  max-width: 600px;
+  margin-right: 40px;
+}
+
+.ingredients__title {
+  text-align: left;
+}
+
+.ingredients__tab {
+  display: flex;
+}
+
+.ingredients__ingredientsContainer {
+  text-align: left;
+  width: 100%;
+  height: 65vh;
+  left: 0px;
+  top: 156px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.ingredients__ingredientsContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.ingredients__ingredientsContainer::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+
+.ingredients__ingredientsContainer::-webkit-scrollbar-thumb {
+  background: #a5a5d6;
+}
+
+.ingredients__ingredientsContainer::-webkit-scrollbar-thumb:hover {
+  background: #8585ad;
+}

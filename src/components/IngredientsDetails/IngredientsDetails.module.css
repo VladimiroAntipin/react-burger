@@ -1,0 +1,42 @@
+.modal__titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 640px;
+  height: 64px;
+  margin: 0px auto;
+}
+
+*[aria-modal="true"] .modal__titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  width: 640px;
+  height: 64px;
+  margin: 0px auto;
+}
+
+.modal__ingredientsInfoContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  row-gap: 20px;
+  width: 516px;
+  margin: 0px auto 60px;
+}
+
+.modal__ingredientsInfo {
+  min-width: 112px;
+}
+
+.modal__ingredientsImg {
+  width: 520px;
+  height: 240px;
+  object-fit: contain;
+}
+
+.modal__title {
+  text-align: left;
+}
