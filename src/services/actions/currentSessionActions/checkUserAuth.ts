@@ -1,3 +1,4 @@
+import { Tokens } from "../../../utils/tokens";
 import { ThunkActionS } from "../../../utils/types";
 import { getCurrentUser } from "./getCurrentUser";
 
@@ -8,7 +9,7 @@ export type SessionCheckAuthAction = {
 
 export const checkUserAuth =
   (): ThunkActionS<SessionCheckAuthAction> => (dispatch) => {
-    if (localStorage.getItem("accessToken")) {
+    if (Tokens.accessToken) {
       dispatch(getCurrentUser() as any).finally(() =>
         dispatch({ type: TOKEN_CHECKED })
       );

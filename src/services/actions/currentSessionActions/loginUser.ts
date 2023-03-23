@@ -1,4 +1,5 @@
 import { signIn } from "../../../utils/sessionApi";
+import { Tokens } from "../../../utils/tokens";
 import { SignInRequestData, ThunkActionS, UserData } from "../../../utils/types";
 import { GET_CURRENT_USER_SUCCESS, SessionGetCurrentUserAction } from "./getCurrentUser";
 
@@ -26,8 +27,10 @@ export const loginUser =
             signIn(data)
                 .then((data) => {
                     if (data && data.success) {
-                        localStorage.setItem("accessToken", data.accessToken);
-                        localStorage.setItem("refreshToken", data.refreshToken);
+                        Tokens.value = {
+                            accessToken: data.accessToken,
+                            refreshToken: data.refreshToken,
+                        };
                         dispatch({
                             type: LOGIN_USER_SUCCESS,
                             payload: data.user,

@@ -1,4 +1,5 @@
 import { signOut } from "../../../utils/sessionApi";
+import { Tokens } from "../../../utils/tokens";
 import { ThunkActionS } from "../../../utils/types";
 
 export const LOGOUT_USER_SUCCESS = "LOGOUT_USER_SUCCESS";
@@ -12,8 +13,7 @@ export const logoutUser =
         dispatch({
           type: LOGOUT_USER_SUCCESS,
         });
-        localStorage.removeItem("accessToken");
-        localStorage.removeItem("refreshToken");
+        Tokens.delete();
       })
       .catch((err) => {
         alert(err);
