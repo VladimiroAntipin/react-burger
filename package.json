@@ -13,6 +13,7 @@
     "@types/react-dom": "^18.0.10",
     "@ya.praktikum/react-developer-burger-ui-components": "^1.14.0",
     "child_process": "^1.0.2",
+    "date-fns": "^2.29.3",
     "glob": "^8.1.0",
     "init": "^0.1.2",
     "jotai": "^2.0.1",
