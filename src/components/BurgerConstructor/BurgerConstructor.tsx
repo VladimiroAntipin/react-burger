@@ -1,11 +1,22 @@
-import { Button, ConstructorElement, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  Button,
+  ConstructorElement,
+  CurrencyIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useMemo } from "react";
 import { useDrop } from "react-dnd";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useAppSelector } from "../../hooks/useAppSelector";
-import { useSelectedIngredients, useSelectedIngredientsIds, useSelectedIngredientsPrice } from "../../hooks/useSelectedIngredients";
-import { CONSTRUCTOR_ADD_INGREDIENT, CONSTRUCTOR_RESET_INGREDIENT } from "../../services/actions/burgerConstructor";
+import {
+  useSelectedIngredients,
+  useSelectedIngredientsIds,
+  useSelectedIngredientsPrice,
+} from "../../hooks/useSelectedIngredients";
+import {
+  CONSTRUCTOR_ADD_INGREDIENT,
+  CONSTRUCTOR_RESET_INGREDIENT,
+} from "../../services/actions/burgerConstructor";
 import { CLEAR_ORDER, makeOrder } from "../../services/actions/orderObject";
 import { Ingredient, IngredientType } from "../../utils/types";
 import { BurgerConstructorIngredient } from "../BurgerConstructorIngredient/BurgerConstructorIngredient";
@@ -39,20 +50,20 @@ const useBun = () => {
 
   return useMemo(
     () =>
-    ({
-      top: {
-        ...bunProps,
-        text: [bunProps.text, "(верх)"].join(" "),
-        type: "top",
-        isLocked: true,
-      },
-      bottom: {
-        ...bunProps,
-        text: [bunProps.text, "(низ)"].join(" "),
-        type: "bottom",
-        isLocked: true,
-      },
-    } as const),
+      ({
+        top: {
+          ...bunProps,
+          text: [bunProps.text, "(верх)"].join(" "),
+          type: "top",
+          isLocked: true,
+        },
+        bottom: {
+          ...bunProps,
+          text: [bunProps.text, "(низ)"].join(" "),
+          type: "bottom",
+          isLocked: true,
+        },
+      } as const),
     [bunProps]
   );
 };
@@ -95,7 +106,11 @@ export function BurgerConstructor() {
 
   return (
     <section className={`${burgerConstructorStyle.cart} mt-25 `}>
-      <ul ref={dropRef} className={burgerConstructorStyle.cart__list}>
+      <ul
+        ref={dropRef}
+        className={burgerConstructorStyle.cart__list}
+        data-test={`cart__listIngredients`}
+      >
         <li className={`${burgerConstructorStyle.cart__listItem}`}>
           <ConstructorElement {...bun.top} />
         </li>
@@ -106,6 +121,7 @@ export function BurgerConstructor() {
                 key={ingredient.key}
                 index={index}
                 ingredient={ingredient}
+                data-test={`burgerConstructorIngredient_${ingredient._id}`}
               />
             ))}
           </ul>

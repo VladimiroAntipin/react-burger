@@ -12,8 +12,8 @@ export const IngredientDetails = ({
   if (!ingredient) return null;
   return (
     <>
-      <div className={ingredientsDetailsStyle.modal__titleContainer}>
-        <p className="text text_type_main-large">Детали ингредиента</p>
+      <div className={ingredientsDetailsStyle.modal__titleContainer} >
+        <p className="text text_type_main-large" data-test={`modal__titleContainer`}>Детали ингредиента</p>
       </div>
       <img
         src={ingredient.image}
