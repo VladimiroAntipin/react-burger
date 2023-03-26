@@ -1,10 +1,10 @@
 import { useMemo } from "react";
 import { OrderCard } from "../../components/OrderCard/OrderCard";
 import { useGetFeed } from "../../hooks/orders";
+import { useAppSelector } from "../../hooks/useAppSelector";
 import { Ingredient, Order } from "../../utils/types";
 import FeedStyles from "./feed.module.css";
 import appStyles from "../../components/App/App.module.css"
-import { useAppSelector } from "../../hooks/useAppSelector";
 
 export type OrderEnriched = Omit<Order, "ingredients"> & {
   ingredients: Ingredient[];
