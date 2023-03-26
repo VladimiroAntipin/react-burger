@@ -70,3 +70,25 @@ export type RegisterRequestData = {
   password: string;
   name: string;
 };
+
+export type FeedData = {
+  orders: Order[];
+  total: number;
+  totalToday: number;
+}
+export type FeedState = {
+  wsConnected: boolean;
+  wsError: null | boolean;
+  orderFeedData: FeedData | null;
+  isPageLoading: boolean;
+};
+
+export type Order = {
+  _id: string;
+  ingredients: string[];
+  status: string;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  number: number;
+};

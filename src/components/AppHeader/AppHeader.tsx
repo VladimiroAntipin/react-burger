@@ -23,7 +23,7 @@ function AppHeader() {
           </li>
 
           <li className={`${headerStyle.header__listItem} ml-2`}>
-            <NavLink to="/not-found-404" className={headerStyle.header__link} style={({ isActive }) => isActive ? activeStyle : undefined}>
+            <NavLink to="/feed" className={headerStyle.header__link} style={({ isActive }) => isActive ? activeStyle : undefined}>
               <ListIcon type={isOrders ? "primary" : "secondary"} />
               <p className={`${headerStyle.header__linkText} ml-2 text text_type_main-default`}>
                 Лента Заказов

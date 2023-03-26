@@ -13,6 +13,7 @@ const initialState = {
   isLoading: false,
   error: null,
 };
+
 type OrderState = {
   data: null | OrderResponse;
   isLoading: boolean;

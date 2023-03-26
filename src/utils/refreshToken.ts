@@ -1,12 +1,15 @@
-import { checkResponse } from "./checkResponse";
 import { BASE_URL } from "../services/reducers/fetchReducer";
-import { getCurrentUser } from "../services/actions/currentSessionActions/getCurrentUser";
+import { checkResponse } from "./checkResponse";
+import { Tokens } from "./tokens";
+import { get, isString } from "./typesChecks";
 
-export type TCredentials = {
-  success: boolean;
-  accessToken: string;
-  refreshToken: string;
-}
+export type Credentials =
+  | { success: false }
+  | {
+      success: true;
+      accessToken: string;
+      refreshToken: string;
+    };
 
 export const updateToken = () => {
   return fetch(`${BASE_URL}/auth/token`, {
@@ -15,18 +18,27 @@ export const updateToken = () => {
       "Content-Type": "application/json;charset=utf-8",
     },
     body: JSON.stringify({
-      token: localStorage.getItem("refreshToken"),
+      token: getRefreshTokenFromLocalStorage(),
     }),
-  }).then(checkResponse<TCredentials>);
+  }).then(checkResponse<Credentials>);
+};
+
+export const getRefreshTokenFromLocalStorage = () => {
+  const refreshJwt = Tokens.refreshToken;
+  if (!isString(refreshJwt)) {
+    throw new Error("no refresh token");
+  }
+
+  return refreshJwt;
 };
 
 export function refreshToken() {
-  localStorage.getItem("refreshToken");
-  localStorage.removeItem("accessToken");
   updateToken()
-    .then((data: any) => {
-      localStorage.setItem("accessToken", data.accessToken);
-      getCurrentUser();
+    .then((data) => {
+      const accessToken = get(data, "accessToken");
+      if (isString(accessToken)) {
+        Tokens.accessToken = accessToken;
+      }
     })
     .catch((err) => {
       console.log(err);

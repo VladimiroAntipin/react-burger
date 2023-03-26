@@ -8,6 +8,16 @@
   margin: 0px auto;
 }
 
+*[aria-modal="true"] .modal__titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-items: center;
+  width: 640px;
+  height: 64px;
+  margin: 0px auto;
+}
+
 .modal__ingredientsInfoContainer {
   display: flex;
   flex-direction: row;

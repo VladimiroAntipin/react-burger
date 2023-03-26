@@ -1,0 +1,82 @@
+.orderFeed {
+  margin: 0 auto;
+  max-width: 1280px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.contentBox {
+  width: 100%;
+  height: 70vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.list {
+  max-height: 70vh;
+  width: 100%;
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  list-style-type: none;
+  padding: 0;
+  margin: 0 56px 0 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.list::-webkit-scrollbar-track {
+  background: #2f2f37;
+}
+
+.list::-webkit-scrollbar-thumb {
+  background: #a5a5d6;
+}
+
+.list::-webkit-scrollbar-thumb:hover {
+  background: #8585ad;
+}
+
+.ordersData {
+  max-width: 584px;
+  height: 100%;
+}
+
+.orderStatusBox {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.orderList {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  font-size: 24px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  color: #00cccc;
+  min-height: 152px;
+}
+
+.orderListReady {
+  font-size: 24px;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  min-height: 152px;
+  color: white;
+}
+
+.number {
+  text-shadow: 0px 0px 16px rgb(51 51 255 / 25%),
+    0px 0px 8px rgb(51 51 255 / 25%), 0px 4px 32px rgb(51 51 255 / 50%);
+}
+  

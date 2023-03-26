@@ -1,9 +1,19 @@
 import profileStyle from "./profile.module.css";
-import { NavLink, Route, Routes } from "react-router-dom";
+import { NavLink, Route, Routes, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { logoutUser } from "../../services/actions/currentSessionActions/logoutUser";
 import { OrderHistory } from "../../components/OrderHistory/OrderHistory";
 import { User } from "../../components/User/user";
+import { useGetOrderHistory } from "../../hooks/orders";
+import { OrderItem } from "../../components/OrderItem/OrderItem";
+
+export const ProfileOrderDetails = () => {
+  const { id } = useParams();
+  const feed = useGetOrderHistory() ?? {};
+  const order = feed.orders?.find((order) => order._id === id);
+
+  return order ? <OrderItem order={order}/> : null;
+};
 
 export function ProfilePage() {
   const dispatch = useAppDispatch();
@@ -29,7 +39,7 @@ export function ProfilePage() {
                 Профиль
               </NavLink>
               <NavLink
-                to="/profile/order-history"
+                to="/profile/orders"
                 className={`${profileStyle.button} text text_type_main-medium text_color_inactive`}
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
               >
@@ -52,7 +62,7 @@ export function ProfilePage() {
           <div className={profileStyle.contentBox}>
             <Routes>
               <Route path="/user" element={<User />} />
-              <Route path="/order-history" element={<OrderHistory />} />
+              <Route path="/orders" element={<OrderHistory />} />
             </Routes>
 
           </div>
