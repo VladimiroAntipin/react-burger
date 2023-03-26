@@ -1,5 +1,4 @@
 import { useEffect, useMemo } from "react";
-import { useSelector } from "react-redux";
 import { AppStore } from "../services/store";
 import { FeedState } from "../utils/types";
 import { useAppDispatch } from "./useAppDispatch";
@@ -22,7 +21,7 @@ const createGetFeedHook = (
         });
       }
     }, [dispatch, wsConnected]);
-    const feed = useSelector(
+    const feed = useAppSelector(
       (store: AppStore) => selector(store).orderFeedData
     );
 
