@@ -3,6 +3,8 @@ import { OrderCard } from "../../components/OrderCard/OrderCard";
 import { useGetFeed } from "../../hooks/orders";
 import { Ingredient, Order } from "../../utils/types";
 import FeedStyles from "./feed.module.css";
+import appStyles from "../../components/App/App.module.css"
+import { useAppSelector } from "../../hooks/useAppSelector";
 
 export type OrderEnriched = Omit<Order, "ingredients"> & {
   ingredients: Ingredient[];
@@ -25,6 +27,18 @@ export const OrderFeed = () => {
         ?.map((order) => order.number),
     [transformedOrders]
   );
+
+  const wsConnected = useAppSelector(
+    (store) => store.orderFeed.wsConnected
+  );
+
+  const isPageLoading = useAppSelector(
+    (store) => store.orderFeed.isPageLoading
+  );
+
+  if (wsConnected === false || isPageLoading === true) {
+    return <div className={`${appStyles.loading} text text_type_main-large`}>Загрузка...</div>
+  }
 
   return (
       <div className={FeedStyles.orderFeed}>
