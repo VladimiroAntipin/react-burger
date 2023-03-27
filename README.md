@@ -44,8 +44,12 @@
 * подключение WS
 * добавление модал и страницы с деталями заказа
 
+## SPRINT 16 - TEST
+* тест редюсеры с jest 
+* тест burgerIngredient и burgerConstructor c cypress
+
 ## Ссылка на GitHub
-Ссылка проекта на GitHub [Stellar Burger - GitHub](https://github.com/VladimiroAntipin/react-burger).
+Ссылка проекта на GitHub [Stellar Burger - GitHub](vladimiroantipin.github.io/gh-pages/).
 
 ## Available Scripts
 In the project directory, you can run:
