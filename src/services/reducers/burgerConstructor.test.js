@@ -1,15 +1,12 @@
 import { burgerConstructorReducer as reducer } from './burgerConstructor';
-import * as action from "../actions/burgerConstructor"
+import * as action from "../actions/burgerConstructor";
+import { initialState } from './burgerConstructor';
 
-const INITIAL_STATE = {
-  bun: null,
-  mid: [],
-};
 
 describe("burgerConstructor reducer", () => {
   it("has initial state", () => {
     expect(reducer(undefined, { type: "unexpected" })).toEqual(
-      INITIAL_STATE
+      initialState
     );
   });
 
@@ -18,7 +15,7 @@ describe("burgerConstructor reducer", () => {
     const type = "bun";
 
     expect(
-      reducer(INITIAL_STATE, {
+      reducer(initialState, {
         type: action.CONSTRUCTOR_ADD_INGREDIENT,
         payload: { ingredientId, type },
       })
@@ -30,7 +27,7 @@ describe("burgerConstructor reducer", () => {
 
   it("can handle CONSTRUCTOR_DELETE_INGREDIENT", () => {
     expect(() =>
-      reducer(INITIAL_STATE, {
+      reducer(initialState, {
         type: action.CONSTRUCTOR_DELETE_INGREDIENT,
         payload: { index: 1 },
       })
@@ -50,7 +47,7 @@ describe("burgerConstructor reducer", () => {
 
   it("can handle CONSTRUCTOR_RESET_INGREDIENT", () => {
     expect(
-      reducer(INITIAL_STATE, {
+      reducer(initialState, {
         type: action.CONSTRUCTOR_RESET_INGREDIENT,
       })
     ).toEqual({

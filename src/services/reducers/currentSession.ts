@@ -24,7 +24,7 @@ import {
   TOKEN_CHECKED
 } from "../actions/currentSessionActions";
 
-const initialState = {
+export const initialState = {
   currentUser: null,
   isCurrentUserAuth: false,
   isCurrentUserChecked: false,

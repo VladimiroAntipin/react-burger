@@ -10,7 +10,7 @@ import {
 
 import { WsActions } from "../actions/wsActions";
 
-const initialState: FeedState = {
+export const initialState: FeedState = {
   wsConnected: false,
   wsError: null,
   orderFeedData: null,

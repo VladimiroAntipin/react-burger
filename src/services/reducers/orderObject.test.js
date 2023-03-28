@@ -1,25 +1,20 @@
 import { orderReducer as reducer } from "./orderObject";
-import * as action from '../actions/orderObject'
-
-const INITIAL_STATE = {
-    data: null,
-    isLoading: false,
-    error: null,
-};
+import * as action from '../actions/orderObject';
+import { initialState } from "./orderObject";
 
 describe('orderObject reducer', () => {
 
     it('has initial state', () => {
         expect(reducer(undefined, { type: 'unexpected' })).toEqual(
-            INITIAL_STATE
+            initialState
         );
     });
 
     it('can handle SEND_ORDER_IS_LOADING', () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.SEND_ORDER_IS_LOADING
         })).toEqual({
-            ...INITIAL_STATE,
+            ...initialState,
             isLoading: true,
             error: null,
         });
@@ -27,11 +22,11 @@ describe('orderObject reducer', () => {
 
     it('can handle SEND_ORDER_SUCCESS', () => {
         const data = {}
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.SEND_ORDER_SUCCESS,
             payload: data
         })).toEqual({
-            ...INITIAL_STATE,
+            ...initialState,
             data,
             isLoading: false,
             error: null,
@@ -40,11 +35,11 @@ describe('orderObject reducer', () => {
 
     it('can handle SEND_ORDER_FAILED', () => {
         const error = ""
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.SEND_ORDER_FAILED,
             payload: error
         })).toEqual({
-            ...INITIAL_STATE,
+            ...initialState,
             isLoading: false,
             error
         });
@@ -52,7 +47,7 @@ describe('orderObject reducer', () => {
 
     it("can handle CLEAR_ORDER", () => {
         expect(
-          reducer(INITIAL_STATE, {
+          reducer(initialState, {
             type: action.CLEAR_ORDER,
           })
         ).toEqual({

@@ -1,21 +1,18 @@
 import { ingredientDetailsReducer as reducer } from "./ingredientDetails";
 import * as action from '../actions/ingredientDetails';
-
-const INITIAL_STATE = {
-    data: null
-};
+import { initialState } from "./ingredientDetails";
 
 describe('ingredientDetails reducer', () => {
 
 
     it('has initial state', () => {
         expect(reducer(undefined, { type: 'unexpected' })).toEqual(
-            INITIAL_STATE
+            initialState
         );
     });
 
     it('can handle INGREDIENT_DETAILS_MODAL_CLOSE', () => {
-        expect(reducer(INITIAL_STATE, { 
+        expect(reducer(initialState, { 
             type: action.INGREDIENT_DETAILS_MODAL_CLOSE
         })).toEqual({
             data: null,
@@ -24,7 +21,7 @@ describe('ingredientDetails reducer', () => {
 
     it('can handle INGREDIENT_DETAILS_MODAL_OPEN', () => {
         const data = {}
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.INGREDIENT_DETAILS_MODAL_OPEN,
             payload: data
         })).toEqual({

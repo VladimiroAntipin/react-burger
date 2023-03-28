@@ -12,7 +12,7 @@ type BurgerConstructorState = {
   mid: string[];
 };
 
-const initialState: BurgerConstructorState = {
+export const initialState: BurgerConstructorState = {
   bun: null,
   mid: [],
 };

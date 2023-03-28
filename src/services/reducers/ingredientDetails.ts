@@ -5,7 +5,7 @@ type State = {
   data: null | Ingredient;
 };
 
-const initialState = {
+export const initialState = {
   data: null,
 };
 

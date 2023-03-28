@@ -8,7 +8,7 @@ import {
   SEND_ORDER_SUCCESS
 } from "../actions/orderObject";
 
-const initialState = {
+export const initialState = {
   data: null,
   isLoading: false,
   error: null,

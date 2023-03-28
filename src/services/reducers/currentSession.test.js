@@ -1,45 +1,21 @@
 import { currentSessionReducer as reducer } from "./currentSession";
-import * as action from '../actions/currentSessionActions/index'
-
-const INITIAL_STATE = {
-    currentUser: null,
-    isCurrentUserAuth: false,
-    isCurrentUserChecked: false,
-
-    isAccountLoading: false,
-    isUserResetPassword: false,
-
-    currentUserRequest: false,
-    currentUserFailed: false,
-    currentUserSuccess: false,
-
-    loginRequest: false,
-    loginFailed: false,
-    loginSuccess: false,
-
-    registerRequest: false,
-    registerFailed: false,
-    registerSuccess: false,
-
-    editProfileRequest: false,
-    editProfileFailed: false,
-    editProfileSuccess: false,
-};
+import * as action from '../actions/currentSessionActions/index';
+import { initialState } from "./currentSession";
 
 describe('currentSession reducer', () => {
 
     it('has initial state', () => {
         expect(reducer(undefined, { type: 'unexpected' })).toEqual(
-            INITIAL_STATE
+            initialState
         );
     });
 
     it("can handle TOKEN_CHECKED", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.TOKEN_CHECKED,
         })
         ).toEqual({
-            ...INITIAL_STATE,
+            ...initialState,
             isCurrentUserChecked: true,
         });
     });
@@ -47,11 +23,11 @@ describe('currentSession reducer', () => {
     // FORGOT_PASSWORD //
 
     it("can handle FORGOT_PASSWORD_REQUEST", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.FORGOT_PASSWORD_REQUEST
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 isUserResetPassword: true,
                 isAccountLoading: true,
                 isCurrentUserAuth: false,
@@ -59,11 +35,11 @@ describe('currentSession reducer', () => {
     });
 
     it("can handle FORGOT_PASSWORD_SUCCESS", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.FORGOT_PASSWORD_SUCCESS
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 isUserResetPassword: true,
                 isAccountLoading: false,
                 isCurrentUserAuth: false,
@@ -71,11 +47,11 @@ describe('currentSession reducer', () => {
     });
 
     it("can handle FORGOT_PASSWORD_FAILED", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.FORGOT_PASSWORD_FAILED
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 isAccountLoading: false,
                 isCurrentUserAuth: false,
             });
@@ -84,11 +60,11 @@ describe('currentSession reducer', () => {
     // GET CURRENT USER //
 
     it("can handle GET_CURRENT_USER_REQUEST", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.GET_CURRENT_USER_REQUEST
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 currentUserRequest: true,
                 currentUserSuccess: false,
                 currentUserFailed: false,
@@ -101,12 +77,12 @@ describe('currentSession reducer', () => {
             email: "",
             name: '',
         }
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.GET_CURRENT_USER_SUCCESS,
             payload: currentUser
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 currentUser,
                 currentUserSuccess: true,
                 isCurrentUserAuth: true
@@ -114,11 +90,11 @@ describe('currentSession reducer', () => {
     });
 
     it("can handle GET_CURRENT_USER_FAILED", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.GET_CURRENT_USER_FAILED,
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 currentUserRequest: false,
                 currentUserSuccess: false,
                 currentUserFailed: true,
@@ -130,11 +106,11 @@ describe('currentSession reducer', () => {
     // LOGIN //
 
     it("can handle LOGIN_USER_REQUEST", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.LOGIN_USER_REQUEST,
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 loginRequest: true,
                 loginFailed: false,
                 loginSuccess: false,
@@ -147,12 +123,12 @@ describe('currentSession reducer', () => {
             email: "",
             password: '',
         }
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.LOGIN_USER_SUCCESS,
             payload: currentUser
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 currentUser,
                 loginRequest: false,
                 loginFailed: false,
@@ -162,11 +138,11 @@ describe('currentSession reducer', () => {
     });
 
     it("can handle LOGIN_USER_FAILED", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.LOGIN_USER_FAILED,
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 loginRequest: false,
                 loginSuccess: false,
                 loginFailed: true,
@@ -177,11 +153,11 @@ describe('currentSession reducer', () => {
     // LOGOUT //
 
     it("can handle LOGOUT_USER_SUCCESS", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.LOGOUT_USER_SUCCESS,
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 currentUser: null,
                 isCurrentUserAuth: false,
             });
@@ -190,33 +166,33 @@ describe('currentSession reducer', () => {
     // RECOVER PASSWORD //
 
     it("can handle RECOVER_PASSWORD_REQUEST", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.RECOVER_PASSWORD_REQUEST,
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 isUserResetPassword: false,
                 isCurrentUserAuth: false,
             });
     });
 
     it("can handle RECOVER_PASSWORD_SUCCESS", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.RECOVER_PASSWORD_SUCCESS,
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 isUserResetPassword: true,
                 isCurrentUserAuth: false,
             });
     });
 
     it("can handle RECOVER_PASSWORD_FAILED", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.RECOVER_PASSWORD_FAILED,
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 isUserResetPassword: false,
                 isCurrentUserAuth: false,
             });
@@ -225,11 +201,11 @@ describe('currentSession reducer', () => {
     // REGISTER USER //
 
     it("can handle REGISTER_USER_REQUEST", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.REGISTER_USER_REQUEST,
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 registerRequest: true,
                 registerFailed: false,
                 registerSuccess: false,
@@ -238,11 +214,11 @@ describe('currentSession reducer', () => {
     });
 
     it("can handle REGISTER_USER_SUCCESS", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.REGISTER_USER_SUCCESS,
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 registerRequest: false,
                 registerFailed: false,
                 registerSuccess: true,
@@ -251,11 +227,11 @@ describe('currentSession reducer', () => {
     });
 
     it("can handle REGISTER_USER_FAILED", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.REGISTER_USER_FAILED,
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 registerRequest: false,
                 registerFailed: true,
                 registerSuccess: false,
@@ -266,11 +242,11 @@ describe('currentSession reducer', () => {
     // EDIT PROFILE //
 
     it("can handle EDIT_PROFILE_REQUEST", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.EDIT_PROFILE_REQUEST,
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 editProfileRequest: true,
                 editProfileFailed: false,
                 editProfileSuccess: false,
@@ -283,12 +259,12 @@ describe('currentSession reducer', () => {
             email: "",
             name: '',
         }
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.EDIT_PROFILE_SUCCESS,
             payload: currentUser
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 editProfileRequest: false,
                 editProfileFailed: false,
                 editProfileSuccess: true,
@@ -298,11 +274,11 @@ describe('currentSession reducer', () => {
     });
 
     it("can handle EDIT_PROFILE_FAILED", () => {
-        expect(reducer(INITIAL_STATE, {
+        expect(reducer(initialState, {
             type: action.EDIT_PROFILE_FAILED,
         }))
             .toEqual({
-                ...INITIAL_STATE,
+                ...initialState,
                 editProfileRequest: false,
                 editProfileFailed: true,
                 editProfileSuccess: false,
