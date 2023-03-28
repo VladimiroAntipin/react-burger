@@ -1,4 +1,6 @@
 // Burger ingredient test // 
+import { closeButton } from "../fixtures/constants";
+import { cartList } from "../fixtures/constants";
 
 describe('burgerConstructor is fully working', function () {
     beforeEach(() => {
@@ -9,11 +11,11 @@ describe('burgerConstructor is fully working', function () {
             "accessToken",
             JSON.stringify("test-refreshToken")
         );
-        cy.visit('http://localhost:3000');
+        cy.visit('/');
 
     it('drag-n-drop ingredients', function () {
         cy.get('[data-test="burgerConstructorIngredient_60d3b41abdacab0026a733c8"]').trigger('dragstart');
-        cy.get('[data-test="cart__listIngredients"]').trigger('drop');
+        cy.get(cartList).trigger('drop');
     });
 
     it('send order', function () {
@@ -26,8 +28,8 @@ describe('burgerConstructor is fully working', function () {
     });
 
     it('close modal with order details', function () {
-        cy.get('[data-test="closebutton"]')
-        cy.visit("http://localhost:3000");
+        cy.get(closeButton)
+        cy.visit("/");
     });
 
 }); 
