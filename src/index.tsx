@@ -11,7 +11,7 @@ if (!rootElement) {
 const root = createRoot(rootElement);
 
 root.render(
-  <AppProvider>
-    <App />
+  <AppProvider >
+    <App  />
   </AppProvider>
 );
