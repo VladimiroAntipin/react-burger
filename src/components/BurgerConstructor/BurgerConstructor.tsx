@@ -24,7 +24,7 @@ export const ingredientToConstructorElementProps = (
 const EMPTY_BUN = {
   text: "Перетяните булочку сюда",
   price: 0,
-  thumbnail: "/loading.svg",
+  thumbnail: "Loading.svg",
 };
 
 const useBun = () => {
@@ -93,6 +93,11 @@ export function BurgerConstructor() {
   const bun = useBun();
   const selectedIngredientsIds = useSelectedIngredientsIds();
 
+  const isOrderPreparing = useAppSelector(
+    (store) => store.orderObject.isLoading
+  );
+  
+
   return (
     <section className={`${burgerConstructorStyle.cart} mt-25 `}>
       <ul
@@ -134,7 +139,7 @@ export function BurgerConstructor() {
           size="large"
           extraClass="mr-4"
         >
-          {isUserAuth ? "Оформить заказ" : "Войти в аккаунт"}
+          { isOrderPreparing ? "Загрузка..." : isUserAuth ? "Оформить заказ" : "Войти в аккаунт" }
         </Button>
       </div>
 
