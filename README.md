@@ -59,5 +59,5 @@ In the project directory, you can run:
 * `npm run build` Build
 * `npm run eject` Eject
 
-#### To get a new build
-##### Add in package.json file "homepage": "https://vladimiroantipin.github.io/react-burger/", and in BurgerConstructor.tsx delete '/' in EMPTY_BUN thumbnail
+###### !!To get a new build!!
+##### Add in package.json file "homepage": "https://vladimiroantipin.github.io/react-burger/", and in BurgerConstructor.tsx delete '/' in EMPTY_BUN thumbnail instead the build won't find the svg
