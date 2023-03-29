@@ -17,10 +17,11 @@ export const signOut = () => {
   return fetch(`${BASE_URL}auth/logout`, {
     method: "POST",
     headers: {
+      "Authorization": "Tokens.accessToken",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      token: Tokens.accessToken,
+      token: Tokens.refreshToken,
     }),
   }).then(checkResponse);
 };

@@ -24,7 +24,7 @@ export const ingredientToConstructorElementProps = (
 const EMPTY_BUN = {
   text: "Перетяните булочку сюда",
   price: 0,
-  thumbnail: "Loading.svg",
+  thumbnail: "/Loading.svg",
 };
 
 const useBun = () => {
