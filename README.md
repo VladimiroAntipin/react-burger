@@ -50,6 +50,7 @@
 ## SPRINT 16 - TESTING AND DEPLOY
 * добавление тест для редюсеров
 * добавление тест для компонентов
+* деплой в gh-pages
 
 ## Available Scripts
 In the project directory, you can run:
