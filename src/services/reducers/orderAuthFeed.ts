@@ -1,13 +1,5 @@
 import { FeedState } from "../../utils/types";
-
-import {
-  WS_AUTH_CONNECTION_CLOSED,
-  WS_AUTH_CONNECTION_ERROR,
-  WS_AUTH_CONNECTION_START,
-  WS_AUTH_CONNECTION_SUCCESS,
-  WS_AUTH_GET_MESSAGE,
-  WsAuthActions,
-} from "../actions/wsAuthActions";
+import { OrderHistoryAction } from "../actions/wsAuthActions";
 
 export const initialState: FeedState = {
   wsConnected: false,
@@ -18,22 +10,17 @@ export const initialState: FeedState = {
 
 export const orderAuthFeedReducer = (
   state = initialState,
-  action: WsAuthActions
+  action: OrderHistoryAction
 ): FeedState => {
   switch (action.type) {
-    case WS_AUTH_CONNECTION_START:
-      return {
-        ...state,
-        isPageLoading: true,
-      };
-    case WS_AUTH_CONNECTION_SUCCESS:
+    case "orderHistory/connect":
       return {
         ...state,
         wsError: null,
         wsConnected: true,
       };
 
-    case WS_AUTH_CONNECTION_ERROR:
+    case "orderHistory/error":
       console.log(action.payload);
       return {
         ...state,
@@ -41,14 +28,14 @@ export const orderAuthFeedReducer = (
         wsConnected: false,
       };
 
-    case WS_AUTH_CONNECTION_CLOSED:
+    case "orderHistory/close":
       return {
         ...state,
         wsError: null,
         wsConnected: false,
       };
 
-    case WS_AUTH_GET_MESSAGE:
+    case "orderHistory/update":
       return {
         ...state,
         wsError: null,

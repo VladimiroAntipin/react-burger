@@ -10,18 +10,9 @@ describe('orderAuth reducer', () => {
         );
     });
 
-    it('can handle WS_AUTH_CONNECTION_START', () => {
+    it('can handle ws connect', () => {
         expect(reducer(initialState, {
-            type: action.WS_AUTH_CONNECTION_START
-        })).toEqual({
-            ...initialState,
-            isPageLoading: true,
-        });
-    });
-
-    it('can handle WS_AUTH_CONNECTION_SUCCESS', () => {
-        expect(reducer(initialState, {
-            type: action.WS_AUTH_CONNECTION_SUCCESS
+            type: 'orderHistory/connect'
         })).toEqual({
             ...initialState,
             wsError: null,
@@ -29,9 +20,9 @@ describe('orderAuth reducer', () => {
         });
     });
 
-    it('can handle WS_AUTH_CONNECTION_ERROR', () => {
+    it('can handle ws error', () => {
         expect(reducer(initialState, {
-            type: action.WS_AUTH_CONNECTION_ERROR
+            type: 'orderHistory/error'
         })).toEqual({
             ...initialState,
             wsError: true,
@@ -39,9 +30,9 @@ describe('orderAuth reducer', () => {
         });
     });
 
-    it('can handle WS_AUTH_CONNECTION_CLOSED', () => {
+    it('can handle ws close', () => {
         expect(reducer(initialState, {
-            type: action.WS_AUTH_CONNECTION_CLOSED
+            type: 'orderHistory/close'
         })).toEqual({
             ...initialState,
             wsError: null,
@@ -49,14 +40,14 @@ describe('orderAuth reducer', () => {
         });
     });
 
-    it('can handle WS_AUTH_GET_MESSAGE', () => {
+    it('can handle ws update', () => {
         const orderFeedData = {
             orders: [],
             total: 10,
             totalToday: 100
         }
         expect(reducer(initialState, {
-            type: action.WS_AUTH_GET_MESSAGE,
+            type: 'orderHistory/update',
             payload: orderFeedData
         })).toEqual({
             ...initialState,

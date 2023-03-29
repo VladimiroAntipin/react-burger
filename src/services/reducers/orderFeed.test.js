@@ -10,18 +10,9 @@ describe('orderFeed reducer', () => {
         );
     });
 
-    it('can handle WS_CONNECTION_START', () => {
+    it('can handle ws connect', () => {
         expect(reducer(initialState, {
-            type: action.WS_CONNECTION_START
-        })).toEqual({
-            ...initialState,
-            isPageLoading: true,
-        });
-    });
-
-    it('can handle WS_CONNECTION_SUCCESS', () => {
-        expect(reducer(initialState, {
-            type: action.WS_CONNECTION_SUCCESS
+            type: 'orderFeed/connect'
         })).toEqual({
             ...initialState,
             wsError: null,
@@ -29,9 +20,9 @@ describe('orderFeed reducer', () => {
         });
     });
 
-    it('can handle WS_CONNECTION_ERROR', () => {
+    it('can handle ws error', () => {
         expect(reducer(initialState, {
-            type: action.WS_CONNECTION_ERROR
+            type: 'orderFeed/error'
         })).toEqual({
             ...initialState,
             wsError: true,
@@ -39,9 +30,9 @@ describe('orderFeed reducer', () => {
         });
     });
 
-    it('can handle WS_CONNECTION_CLOSED', () => {
+    it('can handle ws close', () => {
         expect(reducer(initialState, {
-            type: action.WS_CONNECTION_CLOSED
+            type: 'orderFeed/close'
         })).toEqual({
             ...initialState,
             wsError: null,
@@ -49,14 +40,14 @@ describe('orderFeed reducer', () => {
         });
     });
 
-    it('can handle WS_GET_MESSAGE', () => {
+    it('can handle ws update', () => {
         const orderFeedData = {
             orders: [],
             total: 10,
             totalToday: 100
         }
         expect(reducer(initialState, {
-            type: action.WS_GET_MESSAGE,
+            type: 'orderFeed/update',
             payload: orderFeedData
         })).toEqual({
             ...initialState,
