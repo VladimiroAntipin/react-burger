@@ -50,7 +50,6 @@
 ## SPRINT 16 - TESTING AND DEPLOY
 * добавление тест для редюсеров
 * добавление тест для компонентов
-* деплой в gh-pages
 
 ## Available Scripts
 In the project directory, you can run:
@@ -59,6 +58,5 @@ In the project directory, you can run:
 * `npm run build` Build
 * `npm run eject` Eject
 
-
-## !!To get a new build!!
-Add in package.json file "homepage": "https://vladimiroantipin.github.io/react-burger/", and in BurgerConstructor.tsx delete '/' in EMPTY_BUN thumbnail instead the build won't find the svg
+#### To get a new build
+##### Add in package.json file "homepage": "https://vladimiroantipin.github.io/react-burger/", and in BurgerConstructor.tsx delete '/' in EMPTY_BUN thumbnail

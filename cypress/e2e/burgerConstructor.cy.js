@@ -12,24 +12,19 @@ describe('burgerConstructor is fully working', function () {
             JSON.stringify("test-refreshToken")
         );
         cy.visit('/');
+    });
+
+    it('should send order', () => {
+        cy.get('[data-test="button-order"]').click('postOrder')
+    });
 
     it('drag-n-drop ingredients', function () {
         cy.get('[data-test="burgerConstructorIngredient_60d3b41abdacab0026a733c8"]').trigger('dragstart');
         cy.get(cartList).trigger('drop');
     });
 
-    it('send order', function () {
-            cy.get('[data-test="button-order"]').click('postOrder')
-        })
-    });
-
-    it('open modal with order details', function () {
+    it('open and close modal with order details', function () {
         cy.get('[data-test="orderDetails__orderNumber"]').contains("123").should("exist");
+        cy.get(closeButton).click()
     });
-
-    it('close modal with order details', function () {
-        cy.get(closeButton)
-        cy.visit("/");
-    });
-
 }); 

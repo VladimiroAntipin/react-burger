@@ -4,9 +4,7 @@ import { closeButton } from "../fixtures/constants";
 
 describe("ingredient list is loaded and fully working", function () {
   beforeEach(function () {
-    cy.intercept("GET", "/api/ingredients", {
-      fixture: "ingredients",
-    });
+    cy.intercept("GET", "/api/ingredients", { fixture: "ingredients" });
     cy.visit('/');
   });
 
@@ -17,15 +15,11 @@ describe("ingredient list is loaded and fully working", function () {
     cy.get(cartList).trigger("drop");
   });
 
-  it("open modal with ingredient", function () {
+  it("open and close modal with ingredient", function () {
+    cy.get('[data-test="burgerIngredient_60d3b41abdacab0026a733c6"]').click()
     cy.get('[data-test="modal__titleContainer"]')
       .contains("Детали ингредиента")
       .should("exist");
-      cy.visit('/ingredients/60d3b41abdacab0026a733c6')
-  });
-
-  it("close modal with ingredient", function () {
-    cy.get(closeButton)
-      cy.visit('/');
+    cy.get(closeButton).click()
   });
 });
