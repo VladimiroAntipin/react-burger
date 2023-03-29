@@ -14,16 +14,20 @@ describe('burgerConstructor is fully working', function () {
         cy.visit('/');
     });
 
-    it('should send order', () => {
-        cy.get('[data-test="button-order"]').click('postOrder')
-    });
+    it('should add ingredients to the cart send the order', () => {
+        cy.get('[class^=BurgerConstructor_cart]').as("constructor");
 
-    it('drag-n-drop ingredients', function () {
-        cy.get('[data-test="burgerConstructorIngredient_60d3b41abdacab0026a733c8"]').trigger('dragstart');
-        cy.get(cartList).trigger('drop');
-    });
+        cy.get('li').contains('булка R2-D3').trigger("dragstart").trigger("dragleave");
+        cy.get(cartList).trigger("drop");
 
-    it('open and close modal with order details', function () {
+        cy.get('li').contains('Филе Люминесцентного').trigger("dragstart").trigger("dragleave");
+        cy.get(cartList).trigger("drop");
+
+
+        cy.get('li').contains('Говяжий метеорит').trigger("dragstart").trigger("dragleave");
+        cy.get(cartList).trigger("drop");
+
+        cy.get('[data-test="button-order"]').click({force: true})
         cy.get('[data-test="orderDetails__orderNumber"]').contains("123").should("exist");
         cy.get(closeButton).click()
     });
