@@ -8,6 +8,7 @@ export type SessionLogoutAction = Record<"type", typeof LOGOUT_USER_SUCCESS>;
 
 export const logoutUser =
   (): ThunkActionS<SessionLogoutAction> => (dispatch) => {
+
     signOut()
       .then(() => {
         dispatch({
