@@ -115,12 +115,11 @@ export function BurgerConstructor() {
                 key={ingredient.key}
                 index={index}
                 ingredient={ingredient}
-                data-test={`burgerConstructorIngredient_${ingredient._id}`}
               />
             ))}
           </ul>
         </div>
-        <li className={`${burgerConstructorStyle.cart__listItem}`}>
+        <li className={`${burgerConstructorStyle.cart__listItem}`} >
           <ConstructorElement {...bun.bottom} />
         </li>
       </ul>
@@ -138,6 +137,7 @@ export function BurgerConstructor() {
           type="primary"
           size="large"
           extraClass="mr-4"
+          data-test={`button-order`}
         >
           { isOrderPreparing ? "Загрузка..." : isUserAuth ? "Оформить заказ" : "Войти в аккаунт" }
         </Button>

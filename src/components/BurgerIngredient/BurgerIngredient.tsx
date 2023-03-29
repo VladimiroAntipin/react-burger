@@ -37,6 +37,7 @@ export const BurgerIngredient = ({
           } satisfies LocationState
         }
         className={ingredientCardStyle.ingredients__listCard}
+        data-test={`burgerIngredient_${ingredientId}`}
       >
         <Counter count={useBasketCountOf(ingredientId)} size="default" />
         <img src={image} alt={name} />

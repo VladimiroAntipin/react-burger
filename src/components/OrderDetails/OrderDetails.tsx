@@ -9,7 +9,7 @@ export const OrderDetails = () => {
   return (
     <>  
       <p
-        className={`${orderDetailsStyle.orderDetails__orderNumber} text text_type_digits-large mt-30 mb-8`} data-test='orderDetails__orderNumber'
+        className={`${orderDetailsStyle.orderDetails__orderNumber} text text_type_digits-large mt-30 mb-8`} data-test={`orderDetails__orderNumber`}
       >
         {"order" in data && data?.order.number}
       </p>
