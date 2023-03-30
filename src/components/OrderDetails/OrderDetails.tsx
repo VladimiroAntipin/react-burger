@@ -9,11 +9,11 @@ export const OrderDetails = () => {
   return (
     <>  
       <p
-        className={`${orderDetailsStyle.orderDetails__orderNumber} text text_type_digits-large mt-30 mb-8`}
+        className={`${orderDetailsStyle.orderDetails__orderNumber} text text_type_digits-large mt-30 mb-8`} data-test={`orderDetails__orderNumber`}
       >
         {"order" in data && data?.order.number}
       </p>
-      <p className="text text_type_main-medium mb-15">идентификатор заказа</p>
+      <p className="text text_type_main-medium mb-15" >идентификатор заказа</p>
       <img
         src={done}
         alt="заказано"

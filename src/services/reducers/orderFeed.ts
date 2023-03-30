@@ -1,16 +1,7 @@
 import { FeedState } from "../../utils/types";
+import { OrderFeedAction } from "../actions/wsActions";
 
-import {
-  WS_CONNECTION_CLOSED,
-  WS_CONNECTION_ERROR,
-  WS_CONNECTION_START,
-  WS_CONNECTION_SUCCESS,
-  WS_GET_MESSAGE,
-} from "../actions/wsActions";
-
-import { WsActions } from "../actions/wsActions";
-
-const initialState: FeedState = {
+export const initialState: FeedState = {
   wsConnected: false,
   wsError: null,
   orderFeedData: null,
@@ -19,36 +10,31 @@ const initialState: FeedState = {
 
 export const orderFeedReducer = (
   state: FeedState = initialState,
-  action: WsActions
+  action: OrderFeedAction
 ): FeedState => {
   switch (action.type) {
-    case WS_CONNECTION_START:
-      return {
-        ...state,
-        isPageLoading: true,
-      };
-    case WS_CONNECTION_SUCCESS:
+    case "orderFeed/connect":
       return {
         ...state,
         wsError: null,
         wsConnected: true,
       };
 
-    case WS_CONNECTION_ERROR:
+    case "orderFeed/error":
       return {
         ...state,
         wsError: true,
         wsConnected: false,
       };
 
-    case WS_CONNECTION_CLOSED:
+    case "orderFeed/close":
       return {
         ...state,
         wsError: null,
         wsConnected: false,
       };
 
-    case WS_GET_MESSAGE:
+    case "orderFeed/update":
       return {
         ...state,
         wsError: null,

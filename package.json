@@ -5,7 +5,6 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.2",
     "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.11",
@@ -41,7 +40,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format-dist": "prettier -w -u ./dist/**/*"
+    "cypress:open": "./node_modules/.bin/cypress open",
+    "format-dist": "prettier -w -u ./dist/**/*",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -62,12 +64,21 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
     "@total-typescript/ts-reset": "^0.4.2",
     "@types/react-portal": "^4.0.4",
+    "@types/redux-mock-store": "^1.0.3",
+    "cypress": "^12.8.1",
     "esbuild": "^0.17.6",
+    "eslint-plugin-cypress": "^2.12.1",
     "fast-glob": "^3.2.12",
+    "fetch-mock": "^9.11.0",
+    "gh-pages": "^5.0.0",
+    "jest": "^27.5.1",
     "prettier": "^2.8.4",
     "prop-types": "^15.8.1",
+    "react-test-renderer": "^18.2.0",
+    "redux-mock-store": "^1.5.4",
     "tsx": "^3.12.3"
   }
 }

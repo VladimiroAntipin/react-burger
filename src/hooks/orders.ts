@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from "react";
+import { WsConnectAction } from "../services/middlewares/socketMiddleware";
 import { AppStore } from "../services/store";
 import { FeedState } from "../utils/types";
 import { useAppDispatch } from "./useAppDispatch";
@@ -7,7 +8,7 @@ import { useIngredientsMap } from "./useIngredients";
 
 const createGetFeedHook = (
   selector: (store: AppStore) => FeedState,
-  connectAction: "WS_CONNECTION_START" | "WS_AUTH_CONNECTION_START"
+  getPayload: () => { actionPrefix: "orderFeed" | "orderHistory"; url: string }
 ) => {
   const useGetFeed = () => {
     const ingredients = useIngredientsMap();
@@ -17,8 +18,9 @@ const createGetFeedHook = (
     useEffect(() => {
       if (!wsConnected) {
         dispatch({
-          type: connectAction,
-        });
+          type: "WS_CONNECT",
+          payload: getPayload(),
+        } as WsConnectAction as any);
       }
     }, [dispatch, wsConnected]);
     const feed = useAppSelector(
@@ -32,9 +34,9 @@ const createGetFeedHook = (
           feed?.orders
             ?.map((order) => ({
               ...order,
-              ingredients: order.ingredients.map(
-                (ingredient) => ingredients[ingredient]
-              ),
+              ingredients: order.ingredients
+                .map((ingredient) => ingredients[ingredient])
+                .filter(Boolean),
             }))
             ?.map((order) => ({
               ...order,
@@ -53,10 +55,19 @@ const createGetFeedHook = (
 
 export const useGetFeed = createGetFeedHook(
   (store) => store.orderFeed,
-  "WS_CONNECTION_START"
+  () => ({
+    actionPrefix: "orderFeed",
+    url: "wss://norma.nomoreparties.space/orders/all",
+  })
 );
 
 export const useGetOrderHistory = createGetFeedHook(
   (store) => store.orderAuthFeed,
-  "WS_AUTH_CONNECTION_START"
+  () => {
+    const token = localStorage.getItem("accessToken")?.replace("Bearer ", "");
+    return {
+      actionPrefix: "orderHistory",
+      url: `wss://norma.nomoreparties.space/orders?token=${token}`,
+    };
+  }
 );

@@ -1,4 +1,7 @@
-import { Counter, CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import {
+  Counter,
+  CurrencyIcon,
+} from "@ya.praktikum/react-developer-burger-ui-components";
 import { useDrag } from "react-dnd";
 import { Link, useLocation } from "react-router-dom";
 import { useBasketCountOf } from "../../hooks/useBasketCountOf";
@@ -34,10 +37,12 @@ export const BurgerIngredient = ({
           } satisfies LocationState
         }
         className={ingredientCardStyle.ingredients__listCard}
+        data-test={`burgerIngredient_${ingredientId}`}
       >
         <Counter count={useBasketCountOf(ingredientId)} size="default" />
         <img src={image} alt={name} />
         <div
+          data-test={`ingredients__listCard_${ingredientId}`}
           className={`${ingredientCardStyle.ingredients__priceContainer} mb-2`}
         >
           <p className="text text_type_digits-default">{price}</p>

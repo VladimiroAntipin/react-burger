@@ -1,6 +1,9 @@
 # Stellar Burger
 ## Учебный проект Яндекс Практикума
 
+## Ссылка на GitHub Pages
+Ссылка проекта на GitHub Pages [Stellar Burger - GitHub Pages](https://vladimiroantipin.github.io/react-burger/).
+
 ## SPRINT 11 - ВЁРСТКА
 При создании этого проекта был использован:
 * React;
@@ -44,8 +47,9 @@
 * подключение WS
 * добавление модал и страницы с деталями заказа
 
-## Ссылка на GitHub
-Ссылка проекта на GitHub [Stellar Burger - GitHub](https://github.com/VladimiroAntipin/react-burger).
+## SPRINT 16 - TESTING AND DEPLOY
+* добавление тест для редюсеров
+* добавление тест для компонентов
 
 ## Available Scripts
 In the project directory, you can run:
@@ -53,3 +57,6 @@ In the project directory, you can run:
 * `npm test` Interactive watch mode
 * `npm run build` Build
 * `npm run eject` Eject
+
+#### To get a new build
+##### Add in package.json file "homepage": "https://vladimiroantipin.github.io/react-burger/", and in BurgerConstructor.tsx delete '/' in EMPTY_BUN thumbnail

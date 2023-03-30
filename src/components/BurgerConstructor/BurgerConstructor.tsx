@@ -24,7 +24,7 @@ export const ingredientToConstructorElementProps = (
 const EMPTY_BUN = {
   text: "Перетяните булочку сюда",
   price: 0,
-  thumbnail: "/loading.svg",
+  thumbnail: "/Loading.svg",
 };
 
 const useBun = () => {
@@ -93,9 +93,18 @@ export function BurgerConstructor() {
   const bun = useBun();
   const selectedIngredientsIds = useSelectedIngredientsIds();
 
+  const isOrderPreparing = useAppSelector(
+    (store) => store.orderObject.isLoading
+  );
+  
+
   return (
     <section className={`${burgerConstructorStyle.cart} mt-25 `}>
-      <ul ref={dropRef} className={burgerConstructorStyle.cart__list}>
+      <ul
+        ref={dropRef}
+        className={burgerConstructorStyle.cart__list}
+        data-test={`cart__listIngredients`}
+      >
         <li className={`${burgerConstructorStyle.cart__listItem}`}>
           <ConstructorElement {...bun.top} />
         </li>
@@ -110,7 +119,7 @@ export function BurgerConstructor() {
             ))}
           </ul>
         </div>
-        <li className={`${burgerConstructorStyle.cart__listItem}`}>
+        <li className={`${burgerConstructorStyle.cart__listItem}`} >
           <ConstructorElement {...bun.bottom} />
         </li>
       </ul>
@@ -128,8 +137,9 @@ export function BurgerConstructor() {
           type="primary"
           size="large"
           extraClass="mr-4"
+          data-test={`button-order`}
         >
-          {isUserAuth ? "Оформить заказ" : "Войти в аккаунт"}
+          { isOrderPreparing ? "Загрузка..." : isUserAuth ? "Оформить заказ" : "Войти в аккаунт" }
         </Button>
       </div>
 

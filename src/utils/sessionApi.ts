@@ -13,17 +13,13 @@ export const setUserInfo = (data: UserData) =>
     json: data,
   });
 
-export const signOut = () => {
-  return fetch(`${BASE_URL}auth/logout`, {
+  export const signOut = () =>
+  fetchEnchanced(`${BASE_URL}auth/logout`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
+    json: {
+      token: Tokens.refreshToken,
     },
-    body: JSON.stringify({
-      token: Tokens.accessToken,
-    }),
-  }).then(checkResponse);
-};
+  });
 
 export const signIn = (data: SignInRequestData) => {
   return fetch(`${BASE_URL}auth/login`, {

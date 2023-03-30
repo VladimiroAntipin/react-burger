@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { BrowserRouter as Router, Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom";
+import { HashRouter as Router, Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../hooks/useAppDispatch";
 import { useGetFeed } from "../../hooks/orders";
 import { OrderFeed } from "../../pages/feed/feed";
